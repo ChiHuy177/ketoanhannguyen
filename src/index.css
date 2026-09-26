@@ -1,0 +1,83 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Reveal-on-scroll: toggled by the useReveal IntersectionObserver hook. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* CTA shine sweep on hover. */
+.cta-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cta-shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+.cta-shine:hover::after {
+  transform: translateX(120%);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta-shine::after {
+    transition: none;
+  }
+}
+
+/* Card lift on hover — bordered cards throughout the site use this. */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px -10px rgba(197, 160, 89, 0.2);
+  border-color: #c5a059;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-hover {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: none;
+  }
+}
+
+/* Honest placeholder panel for photos not yet supplied (founder portrait, office/team). */
+.photo-pending {
+  position: relative;
+  background: linear-gradient(160deg, #fafafa, #f5e9d0);
+  border: 1px solid rgba(197, 160, 89, 0.35);
+}
+.photo-pending .mark {
+  opacity: 0.16;
+}
