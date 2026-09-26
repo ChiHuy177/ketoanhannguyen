@@ -7,6 +7,7 @@ import {
   Eye, Target, Zap, TriangleAlert,
 } from 'lucide-react';
 import logo from './assets/HN_logo.png';
+import { content as t, SERVICES_DATA, PROCESS_DATA, CUSTOMERS_DATA, DIFFERENTIATORS_DATA, STARTING_POINTS_DATA, COMMITMENTS_DATA } from './locales.js';
 import directorImg from './assets/director.png';
 import bangCuNhan from './assets/bang_cu_nhan.png';
 import bangThacSi from './assets/bang_thac_si.png';
@@ -248,6 +249,7 @@ function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedService, setExpandedService] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [lang, setLang] = useState('vi');
   
   // Create refs for scroll spy
   const serviceRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
@@ -268,16 +270,28 @@ function App() {
           </a>
 
           <div className="hidden md:flex space-x-8 text-sm font-medium text-gray-500 uppercase tracking-widest">
-            {NAV.map((item) => (
+            {[
+              { href: '#about', label: t[lang].nav.about },
+              { href: '#services', label: t[lang].nav.services },
+              { href: '#difference', label: lang === 'vi' ? 'Khác biệt' : 'Difference' },
+              { href: '#customers', label: t[lang].nav.customers },
+              { href: '#process', label: lang === 'vi' ? 'Quy trình' : 'Process' },
+            ].map((item) => (
               <a key={item.href} href={item.href} className="hover:text-gold transition">
                 {item.label}
               </a>
             ))}
           </div>
 
-          <a href="#contact" className="hidden md:inline-block bg-gold text-white px-6 py-2.5 text-sm uppercase tracking-wide font-medium hover:bg-yellow-600 transition">
-            Liên hệ ngay
-          </a>
+          <div className="hidden md:flex items-center gap-4">
+            <button onClick={() => setLang(lang === 'vi' ? 'en' : 'vi')} className="flex items-center gap-1.5 text-gray-500 font-bold px-3 py-1.5 border border-gray-200 rounded hover:text-gold hover:border-gold uppercase text-xs transition">
+              <Globe2 size={14} />
+              {lang === 'vi' ? 'EN' : 'VI'}
+            </button>
+            <a href="#contact" className="bg-gold text-white px-6 py-2.5 text-sm uppercase tracking-wide font-medium hover:bg-yellow-600 transition">
+              {t[lang].nav.contact}
+            </a>
+          </div>
 
           <button
             className="md:hidden text-dark"
@@ -307,18 +321,18 @@ function App() {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">
-              Công ty TNHH Kế toán & Tư vấn Thuế
+              {t[lang].hero.subtitle}
             </p>
-            <h1 className="text-5xl md:text-7xl font-serif italic text-gold font-bold leading-tight mb-6">
-              Kế toán. Thuế. <br />
-              <span className="text-gold italic">Tư vấn doanh nghiệp.</span>
+            <h1 className="text-5xl md:text-7xl font-serif text-dark font-bold leading-tight mb-6">
+              {t[lang].hero.title1} <br />
+              <span className="text-gold italic">{t[lang].hero.title2}</span>
             </h1>
             <p className="text-lg text-gray-500 mb-10 max-w-lg leading-relaxed">
-              Tuân thủ đúng – Yên tâm phát triển. Chúng tôi không chỉ nhận số liệu để lập báo cáo, chúng tôi thiết lập một hệ thống kế toán hoàn chỉnh và thông suốt cho doanh nghiệp.
+              {t[lang].hero.desc}
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="#services" className="bg-dark text-white px-8 py-3.5 text-sm uppercase tracking-wider hover:bg-gray-800 transition">
-                Khám phá dịch vụ
+                {t[lang].hero.btnPrimary}
               </a>
               <a href="tel:0989772101" className="border border-gold text-gold px-8 py-3.5 text-sm uppercase tracking-wider hover:bg-gold hover:text-white transition">
                 0989 772 101
@@ -347,7 +361,7 @@ function App() {
       <section id="about" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-6">Xây dựng hệ thống – Không chỉ làm báo cáo.</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-6">{t[lang].system.title}</h2>
             <p className="text-gray-500 leading-relaxed">
               Một doanh nghiệp có thể thuê đơn vị kế toán để lập báo cáo. Nhưng một hệ thống kế toán tốt phải giúp doanh nghiệp trả lời được: Doanh thu ghi nhận đúng chưa? Dòng tiền có khớp không? Rủi ro thuế nằm ở đâu? Hân Nguyễn đồng hành để trả lời những câu hỏi đó.
             </p>
@@ -368,12 +382,12 @@ function App() {
       <section id="difference" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
-            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Vì sao chọn Hân Nguyễn</p>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">Điểm khác biệt</h2>
+            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{t[lang].diff.title}</p>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">{t[lang].diff.title}</h2>
           </Reveal>
           
           <div className="grid md:grid-cols-5 gap-6">
-            {DIFFERENTIATORS.map((d, i) => (
+            {DIFFERENTIATORS_DATA[lang].map((d, i) => { d.icon = DIFFERENTIATORS[i].icon; return d; }).map((d, i) => (
               <Reveal key={d.title} delay={i * 60} className="p-8 border border-gray-100 bg-off-white card-hover">
                 <span className="block text-gold font-serif text-2xl mb-4">{String(i + 1).padStart(2, '0')}.</span>
                 <h3 className="text-dark font-semibold mb-3 uppercase tracking-wide text-sm">{d.title}</h3>
@@ -391,25 +405,18 @@ function App() {
             <img src={directorImg} alt="Giám đốc Ngọc Hân" className="w-full aspect-[4/5] object-cover rounded-sm" />
             <div className="absolute -bottom-8 -right-8 bg-white p-8 shadow-xl hidden sm:block z-10">
               <p className="font-serif text-3xl text-gold font-bold">12</p>
-              <p className="text-xs tracking-widest text-gray-500 uppercase mt-2">Năm kinh nghiệm thuế</p>
+              <p className="text-xs tracking-widest text-gray-500 uppercase mt-2">{t[lang].founder.expText}</p>
             </div>
             
                       </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">Người sáng lập</p>
+            <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">{t[lang].founder.subtitle}</p>
             <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
-            <p className="text-gray-500 mb-8">Giám đốc, Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn</p>
+            <p className="text-gray-500 mb-8">{t[lang].founder.role}</p>
 
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-8">
-              {[
-                'Cử nhân Kế toán, Kiểm toán',
-                'Chứng chỉ Kế toán trưởng',
-                'Chứng chỉ Đại lý thuế',
-                'Từng đảm nhiệm Trưởng đoàn kiểm tra',
-                'Rà soát hồ sơ thuế cho nhiều doanh nghiệp',
-                'Kinh nghiệm với doanh nghiệp có yếu tố nước ngoài',
-              ].map((item) => (
+              {t[lang].founder.items.map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
                   <CheckCircle2 size={15} className="text-gold mt-0.5 shrink-0" />
                   <span className="text-gray-600 text-sm">{item}</span>
@@ -418,19 +425,19 @@ function App() {
             </div>
 
             <blockquote className="border-l-2 border-gold pl-6 italic text-gray-500 leading-relaxed font-serif">
-              "Tư vấn kế toán – thuế không chỉ là xử lý một bộ hồ sơ. Điều quan trọng là phải hiểu hoạt động thực tế của doanh nghiệp, xác định đúng bản chất giao dịch và xây dựng phương án phù hợp với quy định pháp luật."
+              {t[lang].founder.quote}
             </blockquote>
           </Reveal>
         </div>
 
         <Reveal className="max-w-7xl mx-auto px-6 mt-24" delay={200}>
           <div className="border-t border-gray-100 pt-16">
-            <h3 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-12 text-center">Bằng Cấp & Chứng Nhận</h3>
+            <h3 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-12 text-center">{t[lang].founder.degrees}</h3>
             <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
               <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
                 <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
                 <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
-                  <img src={bangCuNhan} alt="Bằng Cử nhân Kế toán" className="w-full h-auto object-contain drop-shadow-md" />
+                  <img src={bangCuNhan} alt="{t[lang].founder.deg1}" className="w-full h-auto object-contain drop-shadow-md" />
                 </div>
                 <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">Cử nhân Kế toán, Kiểm toán</p>
                 <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
@@ -439,9 +446,9 @@ function App() {
               <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
                 <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
                 <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
-                  <img src={bangThacSi} alt="Bằng Thạc sĩ" className="w-full h-auto object-contain drop-shadow-md" />
+                  <img src={bangThacSi} alt="{t[lang].founder.deg2}" className="w-full h-auto object-contain drop-shadow-md" />
                 </div>
-                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">Thạc sĩ</p>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg2}</p>
                 <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
               </div>
             </div>
@@ -454,8 +461,8 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex justify-between items-end mb-16">
             <div>
-              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Chuyên môn của chúng tôi</p>
-              <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold">Dịch vụ cốt lõi</h2>
+              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{t[lang].servicesSection.subtitle}</p>
+              <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold">{t[lang].servicesSection.title}</h2>
             </div>
           </div>
 
@@ -463,7 +470,7 @@ function App() {
             {/* Sticky Image on the Left */}
             <div className="hidden md:block md:col-span-5 sticky top-32 z-10 h-[60vh]">
               <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
-                {SERVICES.map((s, i) => (
+                {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => (
                   <img 
                     key={s.title}
                     src={s.img} 
@@ -477,7 +484,7 @@ function App() {
             
             {/* Scrollable Content on the Right */}
             <div className="md:col-span-7 pb-32">
-              {SERVICES.map((s, i) => {
+              {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => {
                 const Icon = s.icon;
                 const isActive = activeServiceIndex === i;
                 return (
@@ -518,12 +525,12 @@ function App() {
       {/* PROCESS SECTION */}
       <section id="process" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold text-center mb-16">Quy trình làm việc minh bạch</h2>
+          <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold text-center mb-16">{t[lang].process.title}</h2>
 
           <div className="relative grid grid-cols-2 md:grid-cols-7 gap-y-10 gap-x-2">
             <div className="hidden md:block absolute top-6 left-10 right-10 h-px bg-gray-200 z-0" />
             <RevealLine />
-            {PROCESS.map((p, i) => (
+            {PROCESS_DATA[lang].map((p, i) => (
               <Reveal key={p.title} delay={i * 350} className="relative z-10 flex flex-col items-center text-center px-2 group">
                 <div
                   className={`w-12 h-12 flex items-center justify-center rounded-full mb-4 border-2 font-serif text-xl transition-all duration-500 ${
@@ -539,9 +546,9 @@ function App() {
           </div>
 
           <Reveal className="mt-20 max-w-4xl mx-auto bg-off-white border border-gray-100 p-8 md:p-10" delay={200}>
-            <p className="text-xl font-serif italic text-gold font-bold mb-6">Hân Nguyễn đồng hành từ đâu?</p>
+            <p className="text-xl font-serif italic text-gold font-bold mb-6">{t[lang].process.start}</p>
             <div className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
-              {STARTING_POINTS.map(([left, right]) => (
+              {STARTING_POINTS_DATA[lang].map(([left, right]) => (
                 <div key={left} className="flex flex-col gap-1">
                   <span className="font-semibold text-sm text-dark">{left}</span>
                   <span className="flex items-center gap-2 text-sm text-gold">
@@ -558,11 +565,11 @@ function App() {
       <section id="customers" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
-            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Phù hợp với</p>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">Đối tượng khách hàng</h2>
+            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{lang === 'vi' ? 'Phù hợp với' : 'Suitable for'}</p>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">{t[lang].customers.title}</h2>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            {CUSTOMERS.map((c, i) => {
+            {CUSTOMERS_DATA[lang].map((c, i) => { c.icon = CUSTOMERS[i].icon; return c; }).map((c, i) => {
               const Icon = c.icon;
               return (
                 <Reveal key={c.title} delay={(i % 4) * 60}>
@@ -580,11 +587,11 @@ function App() {
       <section className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-4">Cam kết của chúng tôi</h2>
-            <p className="text-gray-500">Hân Nguyễn hướng đến việc xây dựng mối quan hệ lâu dài với doanh nghiệp trên cơ sở:</p>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-4">{t[lang].commit.title}</h2>
+            <p className="text-gray-500">{lang === 'vi' ? 'Hân Nguyễn hướng đến việc xây dựng mối quan hệ lâu dài với doanh nghiệp trên cơ sở:' : 'Han Nguyen aims to build long-term relationships with businesses based on:'}</p>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {COMMITMENTS.map((c, i) => {
+            {COMMITMENTS_DATA[lang].map((c, i) => { c.icon = COMMITMENTS[i].icon; return c; }).map((c, i) => {
               const Icon = c.icon;
               return (
                 <Reveal key={c.title} delay={i * 60} className="text-center">
@@ -608,19 +615,19 @@ function App() {
               <img src={logo} alt="HN Logo" className="h-20 md:h-24 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-gray-400 max-w-sm mb-8 text-sm leading-relaxed">
-              Doanh nghiệp tập trung vào kinh doanh. Hân Nguyễn đồng hành phía sau để hệ thống kế toán – thuế được vận hành đúng và kiểm soát được rủi ro.
+              {lang === 'vi' ? 'Doanh nghiệp tập trung vào kinh doanh. Hân Nguyễn đồng hành phía sau để hệ thống kế toán – thuế được vận hành đúng và kiểm soát được rủi ro.' : 'Businesses focus on growth. Han Nguyen supports behind the scenes to ensure the accounting and tax system operates correctly and risks are controlled.'}
             </p>
             <div className="text-xl font-serif text-gold italic">
-              "Tuân thủ đúng – Yên tâm phát triển"
+              {lang === 'vi' ? '"Tuân thủ đúng – Yên tâm phát triển"' : '"Proper compliance – Assured growth"'}
             </div>
           </Reveal>
           
           <Reveal delay={80}>
-            <h4 className="uppercase tracking-widest text-xs font-bold text-gray-500 mb-6">Thông tin liên hệ</h4>
+            <h4 className="uppercase tracking-widest text-xs font-bold text-gray-500 mb-6">{t[lang].contact.title}</h4>
             <ul className="space-y-4 text-gray-300 text-sm">
               <li className="flex items-start">
                 <span className="text-gold mr-3"><MapPin size={18} /></span> 
-                Số 22 đường số 15, KDC An Bình, phường An Bình, Cần Thơ
+                {lang === 'vi' ? 'Số 22 đường số 15, KDC An Bình, phường An Bình, Cần Thơ' : 'No. 22, Street 15, An Binh Residential Area, An Binh Ward, Can Tho City'}
               </li>
               <li className="flex items-center">
                 <span className="text-gold mr-3"><Phone size={18} /></span> 
@@ -628,16 +635,16 @@ function App() {
               </li>
               <li className="flex items-center">
                 <span className="text-gold mr-3"><User size={18} /></span> 
-                Nguyễn Thị Ngọc Hân (Giám đốc / Kế toán trưởng)
+                {lang === 'vi' ? 'Nguyễn Thị Ngọc Hân (Giám đốc / Kế toán trưởng)' : 'Nguyen Thi Ngoc Han (Director / Chief Accountant)'}
               </li>
             </ul>
             
             {submitted ? (
-              <p className="mt-8 text-sm text-gold font-semibold">Đã nhận được yêu cầu của bạn. Hân Nguyễn sẽ liên hệ lại sớm nhất.</p>
+              <p className="mt-8 text-sm text-gold font-semibold">{t[lang].contact.success}</p>
             ) : (
               <form onSubmit={handleSubmit} className="mt-8">
                 <label htmlFor="quick-phone" className="block text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
-                  Để lại số điện thoại, chúng tôi sẽ gọi lại
+                  {lang === 'vi' ? 'Để lại số điện thoại, chúng tôi sẽ gọi lại' : 'Leave your phone number, we will call back'}
                 </label>
                 <div className="flex flex-col sm:flex-row gap-3">
                   <input
@@ -651,7 +658,7 @@ function App() {
                     type="submit"
                     className="cta-shine inline-flex items-center justify-center gap-2 bg-white text-dark px-8 py-3 text-sm uppercase tracking-wide font-medium hover:bg-gold hover:text-white transition"
                   >
-                    Nhận tư vấn ngay <ArrowUpRight size={15} />
+                    {lang === 'vi' ? 'Nhận tư vấn ngay' : 'Get Consultation'} <ArrowUpRight size={15} />
                   </button>
                 </div>
               </form>
