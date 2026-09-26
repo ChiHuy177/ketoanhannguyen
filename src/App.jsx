@@ -243,7 +243,7 @@ function App() {
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">
               Công ty TNHH Kế toán & Tư vấn Thuế
             </p>
-            <h1 className="text-5xl md:text-7xl font-serif text-dark font-bold leading-tight mb-6">
+            <h1 className="text-5xl md:text-7xl font-serif italic text-dark font-bold leading-tight mb-6">
               Kế toán. Thuế. <br />
               <span className="text-gold italic">Tư vấn doanh nghiệp.</span>
             </h1>
@@ -281,7 +281,7 @@ function App() {
       <section id="about" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl font-serif text-dark font-bold mb-6">Xây dựng hệ thống – Không chỉ làm báo cáo.</h2>
+            <h2 className="text-3xl font-serif italic text-dark font-bold mb-6">Xây dựng hệ thống – Không chỉ làm báo cáo.</h2>
             <p className="text-gray-500 leading-relaxed">
               Một doanh nghiệp có thể thuê đơn vị kế toán để lập báo cáo. Nhưng một hệ thống kế toán tốt phải giúp doanh nghiệp trả lời được: Doanh thu ghi nhận đúng chưa? Dòng tiền có khớp không? Rủi ro thuế nằm ở đâu? Hân Nguyễn đồng hành để trả lời những câu hỏi đó.
             </p>
@@ -303,7 +303,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
             <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Vì sao chọn Hân Nguyễn</p>
-            <h2 className="text-3xl font-serif text-dark font-bold">Điểm khác biệt</h2>
+            <h2 className="text-3xl font-serif italic text-dark font-bold">Điểm khác biệt</h2>
           </Reveal>
           
           <div className="grid md:grid-cols-5 gap-6">
@@ -331,7 +331,7 @@ function App() {
 
           <Reveal delay={100}>
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">Người sáng lập</p>
-            <h2 className="text-4xl font-serif text-dark font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
+            <h2 className="text-4xl font-serif italic text-dark font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
             <p className="text-gray-500 mb-8">Giám đốc, Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn</p>
 
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-8">
@@ -363,7 +363,7 @@ function App() {
           <div className="flex justify-between items-end mb-16">
             <div>
               <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Chuyên môn của chúng tôi</p>
-              <h2 className="text-4xl font-serif text-dark font-bold">Dịch vụ cốt lõi</h2>
+              <h2 className="text-4xl font-serif italic text-dark font-bold">Dịch vụ cốt lõi</h2>
             </div>
           </div>
 
@@ -410,7 +410,7 @@ function App() {
       {/* PROCESS SECTION */}
       <section id="process" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-serif text-dark font-bold text-center mb-16">Quy trình làm việc minh bạch</h2>
+          <h2 className="text-3xl font-serif italic text-dark font-bold text-center mb-16">Quy trình làm việc minh bạch</h2>
 
           <div className="relative grid grid-cols-2 md:grid-cols-7 gap-y-10 gap-x-2">
             <div className="hidden md:block absolute top-6 left-10 right-10 h-px bg-gray-200 z-0" />
@@ -430,7 +430,7 @@ function App() {
           </div>
 
           <Reveal className="mt-20 max-w-4xl mx-auto bg-off-white border border-gray-100 p-8 md:p-10" delay={200}>
-            <p className="text-xl font-serif text-dark font-bold mb-6">Hân Nguyễn đồng hành từ đâu?</p>
+            <p className="text-xl font-serif italic text-dark font-bold mb-6">Hân Nguyễn đồng hành từ đâu?</p>
             <div className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
               {STARTING_POINTS.map(([left, right]) => (
                 <div key={left} className="flex flex-col gap-1">
@@ -450,7 +450,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
             <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Phù hợp với</p>
-            <h2 className="text-3xl font-serif text-dark font-bold">Đối tượng khách hàng</h2>
+            <h2 className="text-3xl font-serif italic text-dark font-bold">Đối tượng khách hàng</h2>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
             {CUSTOMERS.map((c, i) => {
@@ -471,7 +471,7 @@ function App() {
       <section className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-serif text-dark font-bold mb-4">Cam kết của chúng tôi</h2>
+            <h2 className="text-3xl font-serif italic text-dark font-bold mb-4">Cam kết của chúng tôi</h2>
             <p className="text-gray-500">Hân Nguyễn hướng đến việc xây dựng mối quan hệ lâu dài với doanh nghiệp trên cơ sở:</p>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
