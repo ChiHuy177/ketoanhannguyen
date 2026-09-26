@@ -7,6 +7,9 @@ import {
   Eye, Target, Zap, TriangleAlert,
 } from 'lucide-react';
 import logo from './assets/HN_logo.png';
+import directorImg from './assets/director.png';
+import bangCuNhan from './assets/bang_cu_nhan.png';
+import bangThacSi from './assets/bang_thac_si.png';
 
 /* ---------------------------------------------------------------------
    Reveal: lightweight IntersectionObserver fade-in.
@@ -67,6 +70,7 @@ const NAV = [
 
 const SERVICES = [
   {
+    img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
     icon: Calculator,
     title: 'Kế toán, thuế trọn gói',
     note: 'Kế toán thuế định kỳ, tờ khai thuế, báo cáo tài chính và quyết toán thuế trọn gói.',
@@ -82,6 +86,7 @@ const SERVICES = [
     ],
   },
   {
+    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200',
     icon: Settings2,
     title: 'Thiết lập hệ thống kế toán',
     note: 'Dành cho doanh nghiệp mới thành lập hoặc tổ chức lại. Xây dựng quy trình, kiểm soát dòng tiền và hướng dẫn nhân sự.',
@@ -92,6 +97,7 @@ const SERVICES = [
     ],
   },
   {
+    img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200',
     icon: ShieldCheck,
     title: 'Tư vấn & Rà soát Rủi ro',
     note: 'Rà soát hồ sơ thuế, chi phí, hóa đơn trước khi thanh tra. Tư vấn ưu đãi và hoàn thuế cho doanh nghiệp.',
@@ -102,6 +108,7 @@ const SERVICES = [
     ],
   },
   {
+    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200',
     icon: Building2,
     title: 'Thành lập & thay đổi',
     note: 'Thành lập doanh nghiệp, thay đổi đăng ký kinh doanh, tạm ngừng, giải thể.',
@@ -112,6 +119,7 @@ const SERVICES = [
     ],
   },
   {
+    img: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=1200',
     icon: Globe2,
     title: 'Doanh nghiệp FDI',
     note: 'Kế toán, thuế, hồ sơ vốn nước ngoài, giấy phép lao động và visa.',
@@ -182,10 +190,68 @@ const COMMITMENTS = [
 /* ---------------------------------------------------------------------
    App
 --------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------
+   useScrollSpy: IntersectionObserver for tracking active sections
+--------------------------------------------------------------------- */
+function useScrollSpy(elements, options) {
+  const [currentIntersectingElementIndex, setCurrentIntersectingElementIndex] = useState(0);
+
+  useEffect(() => {
+    const observers = [];
+    elements.forEach((el, index) => {
+      if (el.current) {
+        const observer = new IntersectionObserver(([entry]) => {
+          if (entry.isIntersecting) {
+            setCurrentIntersectingElementIndex(index);
+          }
+        }, options);
+        observer.observe(el.current);
+        observers.push(observer);
+      }
+    });
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, [elements, options]);
+
+  return currentIntersectingElementIndex;
+}
+
+
+function RevealLine() {
+  const ref = useRef(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        // Expand to almost full width of the container
+        el.style.width = 'calc(100% - 5rem)';
+        io.unobserve(el);
+      }
+    }, { threshold: 0.1 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div 
+      ref={ref} 
+      className="hidden md:block absolute top-6 left-10 h-[2px] bg-gold z-0 transition-all ease-in-out shadow-[0_0_12px_rgba(197,160,89,1)]" 
+      style={{ width: '0%', transitionDuration: '2400ms' }}
+    />
+  );
+}
+
 function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [expandedService, setExpandedService] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  
+  // Create refs for scroll spy
+  const serviceRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+  const activeServiceIndex = useScrollSpy(serviceRefs, { rootMargin: '-45% 0px -45% 0px' });
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -243,7 +309,7 @@ function App() {
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">
               Công ty TNHH Kế toán & Tư vấn Thuế
             </p>
-            <h1 className="text-5xl md:text-7xl font-serif italic text-dark font-bold leading-tight mb-6">
+            <h1 className="text-5xl md:text-7xl font-serif italic text-gold font-bold leading-tight mb-6">
               Kế toán. Thuế. <br />
               <span className="text-gold italic">Tư vấn doanh nghiệp.</span>
             </h1>
@@ -281,7 +347,7 @@ function App() {
       <section id="about" className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-3xl font-serif italic text-dark font-bold mb-6">Xây dựng hệ thống – Không chỉ làm báo cáo.</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-6">Xây dựng hệ thống – Không chỉ làm báo cáo.</h2>
             <p className="text-gray-500 leading-relaxed">
               Một doanh nghiệp có thể thuê đơn vị kế toán để lập báo cáo. Nhưng một hệ thống kế toán tốt phải giúp doanh nghiệp trả lời được: Doanh thu ghi nhận đúng chưa? Dòng tiền có khớp không? Rủi ro thuế nằm ở đâu? Hân Nguyễn đồng hành để trả lời những câu hỏi đó.
             </p>
@@ -303,7 +369,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
             <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Vì sao chọn Hân Nguyễn</p>
-            <h2 className="text-3xl font-serif italic text-dark font-bold">Điểm khác biệt</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">Điểm khác biệt</h2>
           </Reveal>
           
           <div className="grid md:grid-cols-5 gap-6">
@@ -322,16 +388,17 @@ function App() {
       <section id="founder" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <Reveal className="relative">
-            <PhotoPending label="Chân dung Giám đốc Ngọc Hân" ratio="aspect-[4/5]" />
-            <div className="absolute -bottom-8 -right-8 bg-white p-8 shadow-xl hidden sm:block">
+            <img src={directorImg} alt="Giám đốc Ngọc Hân" className="w-full aspect-[4/5] object-cover rounded-sm" />
+            <div className="absolute -bottom-8 -right-8 bg-white p-8 shadow-xl hidden sm:block z-10">
               <p className="font-serif text-3xl text-gold font-bold">12</p>
               <p className="text-xs tracking-widest text-gray-500 uppercase mt-2">Năm kinh nghiệm thuế</p>
             </div>
-          </Reveal>
+            
+                      </Reveal>
 
           <Reveal delay={100}>
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">Người sáng lập</p>
-            <h2 className="text-4xl font-serif italic text-dark font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
+            <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
             <p className="text-gray-500 mb-8">Giám đốc, Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn</p>
 
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-8">
@@ -355,6 +422,31 @@ function App() {
             </blockquote>
           </Reveal>
         </div>
+
+        <Reveal className="max-w-7xl mx-auto px-6 mt-24" delay={200}>
+          <div className="border-t border-gray-100 pt-16">
+            <h3 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-12 text-center">Bằng Cấp & Chứng Nhận</h3>
+            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+              <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
+                <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
+                <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
+                  <img src={bangCuNhan} alt="Bằng Cử nhân Kế toán" className="w-full h-auto object-contain drop-shadow-md" />
+                </div>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">Cử nhân Kế toán, Kiểm toán</p>
+                <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
+              </div>
+              
+              <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
+                <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
+                <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
+                  <img src={bangThacSi} alt="Bằng Thạc sĩ" className="w-full h-auto object-contain drop-shadow-md" />
+                </div>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">Thạc sĩ</p>
+                <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* SERVICES SECTION */}
@@ -363,46 +455,62 @@ function App() {
           <div className="flex justify-between items-end mb-16">
             <div>
               <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Chuyên môn của chúng tôi</p>
-              <h2 className="text-4xl font-serif italic text-dark font-bold">Dịch vụ cốt lõi</h2>
+              <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold">Dịch vụ cốt lõi</h2>
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {SERVICES.map((s, i) => {
-              const Icon = s.icon;
-              const isOpen = expandedService === i;
-              return (
-                <Reveal
-                  key={s.title}
-                  delay={(i % 3) * 60}
-                  className={`bg-white p-10 border border-gray-100 transition duration-300 card-hover ${i >= 3 ? 'md:col-span-1' : ''}`}
-                >
-                  <div className="w-12 h-12 bg-gold-light/20 flex items-center justify-center text-gold mb-6 rounded-sm">
-                    <Icon size={24} strokeWidth={1.5} />
-                  </div>
-                  <h3 className="text-xl font-serif text-dark mb-4">{s.title}</h3>
-                  <p className="text-gray-500 text-sm mb-6 leading-relaxed">{s.note}</p>
+          <div className="grid md:grid-cols-12 gap-8 md:gap-16 items-start relative">
+            {/* Sticky Image on the Left */}
+            <div className="hidden md:block md:col-span-5 sticky top-32 z-10 h-[60vh]">
+              <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
+                {SERVICES.map((s, i) => (
+                  <img 
+                    key={s.title}
+                    src={s.img} 
+                    alt={s.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${activeServiceIndex === i ? 'opacity-100' : 'opacity-0'}`}
+                  />
+                ))}
+                <div className="absolute inset-0 bg-dark/20 mix-blend-multiply" />
+              </div>
+            </div>
+            
+            {/* Scrollable Content on the Right */}
+            <div className="md:col-span-7 pb-32">
+              {SERVICES.map((s, i) => {
+                const Icon = s.icon;
+                const isActive = activeServiceIndex === i;
+                return (
+                  <div 
+                    key={s.title} 
+                    ref={serviceRefs[i]}
+                    className={`py-16 md:py-32 border-b border-gray-200/50 transition-all duration-300 ease-out relative ${isActive ? '' : ''}`}
+                  >
+                    {/* Active Indicator Line */}
+                    <div className={`absolute left-[-2rem] top-1/2 -translate-y-1/2 w-1 h-24 bg-gold transition-opacity duration-300 rounded-r-sm hidden md:block ${isActive ? 'opacity-100' : 'opacity-0'}`} />
 
-                  {isOpen && (
-                    <ul className="text-sm text-gray-500 space-y-2 mb-6">
+                    {/* Mobile Image */}
+                    <div className="block md:hidden w-full h-48 mb-8 rounded-sm overflow-hidden shadow-md">
+                      <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
+                    </div>
+
+                    <div className="w-16 h-16 bg-gold-light/20 flex items-center justify-center text-gold mb-8 rounded-sm">
+                      <Icon size={32} strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-3xl font-serif text-dark font-bold mb-6">{s.title}</h3>
+                    <p className="text-gray-500 text-base mb-8 leading-relaxed max-w-lg">{s.note}</p>
+
+                    <ul className="text-sm text-gray-500 space-y-4 border-l-2 border-gold/30 pl-6">
                       {s.items.map((item) => (
-                        <li key={item} className="flex items-start gap-2">
-                          <span className="w-1 h-1 bg-gold rounded-full mt-2 shrink-0" /> {item}
+                        <li key={item} className="flex items-center gap-3 font-medium">
+                          <CheckCircle2 size={16} className="text-gold shrink-0" /> {item}
                         </li>
                       ))}
                     </ul>
-                  )}
-
-                  <button
-                    onClick={() => setExpandedService(isOpen ? -1 : i)}
-                    className="flex items-center gap-1.5 text-sm font-semibold text-gold hover:text-yellow-600 transition-colors"
-                  >
-                    {isOpen ? 'Thu gọn' : 'Xem chi tiết'}
-                    <ChevronDown size={14} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                </Reveal>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -410,27 +518,28 @@ function App() {
       {/* PROCESS SECTION */}
       <section id="process" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-serif italic text-dark font-bold text-center mb-16">Quy trình làm việc minh bạch</h2>
+          <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold text-center mb-16">Quy trình làm việc minh bạch</h2>
 
           <div className="relative grid grid-cols-2 md:grid-cols-7 gap-y-10 gap-x-2">
             <div className="hidden md:block absolute top-6 left-10 right-10 h-px bg-gray-200 z-0" />
+            <RevealLine />
             {PROCESS.map((p, i) => (
-              <Reveal key={p.title} delay={i * 50} className="relative z-10 flex flex-col items-center text-center px-2">
+              <Reveal key={p.title} delay={i * 350} className="relative z-10 flex flex-col items-center text-center px-2 group">
                 <div
-                  className={`w-12 h-12 flex items-center justify-center rounded-full mb-4 border-2 font-serif text-xl ${
-                    p.active ? 'bg-gold border-gold text-white' : 'bg-white border-gold text-gold'
+                  className={`w-12 h-12 flex items-center justify-center rounded-full mb-4 border-2 font-serif text-xl transition-all duration-500 ${
+                    p.active ? 'bg-gold border-gold text-white shadow-[0_0_15px_rgba(197,160,89,0.6)]' : 'bg-white border-gray-200 text-gray-400 group-[.is-visible]:border-gold group-[.is-visible]:text-gold group-[.is-visible]:shadow-[0_0_15px_rgba(197,160,89,0.4)] bg-white'
                   }`}
                 >
                   {i + 1}
                 </div>
-                <h4 className="font-bold text-dark text-sm uppercase tracking-wide mb-2">{p.title}</h4>
-                <p className="text-xs text-gray-500 leading-relaxed">{p.desc}</p>
+                <h4 className="font-bold text-dark text-sm uppercase tracking-wide mb-2 transition-colors duration-500">{p.title}</h4>
+                <p className="text-xs text-gray-500 leading-relaxed transition-opacity duration-500">{p.desc}</p>
               </Reveal>
             ))}
           </div>
 
           <Reveal className="mt-20 max-w-4xl mx-auto bg-off-white border border-gray-100 p-8 md:p-10" delay={200}>
-            <p className="text-xl font-serif italic text-dark font-bold mb-6">Hân Nguyễn đồng hành từ đâu?</p>
+            <p className="text-xl font-serif italic text-gold font-bold mb-6">Hân Nguyễn đồng hành từ đâu?</p>
             <div className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
               {STARTING_POINTS.map(([left, right]) => (
                 <div key={left} className="flex flex-col gap-1">
@@ -450,7 +559,7 @@ function App() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center mb-16">
             <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">Phù hợp với</p>
-            <h2 className="text-3xl font-serif italic text-dark font-bold">Đối tượng khách hàng</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">Đối tượng khách hàng</h2>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
             {CUSTOMERS.map((c, i) => {
@@ -471,7 +580,7 @@ function App() {
       <section className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-3xl font-serif italic text-dark font-bold mb-4">Cam kết của chúng tôi</h2>
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-4">Cam kết của chúng tôi</h2>
             <p className="text-gray-500">Hân Nguyễn hướng đến việc xây dựng mối quan hệ lâu dài với doanh nghiệp trên cơ sở:</p>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -553,7 +662,6 @@ function App() {
           &copy; 2026 Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn. All rights reserved.
         </div>
       </footer>
-
     </div>
   );
 }
