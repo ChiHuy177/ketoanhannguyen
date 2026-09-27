@@ -13,6 +13,7 @@ import directorImg from './assets/director.png';
 import bangCuNhan from './assets/bang_cu_nhan.png';
 import bangThacSi from './assets/bang_thac_si.png';
 import bangKhen1 from './assets/bangkhen_1.png';
+import bangKhen2 from './assets/bangkhen_2.png';
 
 /* ---------------------------------------------------------------------
    Reveal: lightweight IntersectionObserver fade-in.
@@ -464,7 +465,7 @@ function App() {
         <Reveal className="max-w-7xl mx-auto px-6 mt-24" delay={200}>
           <div className="border-t border-gray-100 pt-16">
             <h3 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-12 text-center">{t[lang].founder.degrees}</h3>
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
               <div 
                 className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500 cursor-zoom-in"
                 onClick={() => setZoomedImg(bangCuNhan)}
@@ -498,6 +499,18 @@ function App() {
                   <img src={bangKhen1} alt={t[lang].founder.deg3} className="w-full h-auto object-contain drop-shadow-md" />
                 </div>
                 <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg3}</p>
+                <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
+              </div>
+              
+              <div 
+                className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500 cursor-zoom-in"
+                onClick={() => setZoomedImg(bangKhen2)}
+              >
+                <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
+                <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
+                  <img src={bangKhen2} alt={t[lang].founder.deg4} className="w-full h-auto object-contain drop-shadow-md" />
+                </div>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg4}</p>
                 <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
               </div>
             </div>

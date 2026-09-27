@@ -51,6 +51,7 @@ export const content = {
       deg1: 'Cử nhân Kế toán, Kiểm toán',
       deg2: 'Thạc sĩ',
       deg3: 'Bằng khen của Bộ Tài chính',
+      deg4: 'Chứng chỉ Đại lý Thuế',
       exp: '12',
       expText: 'Năm kinh nghiệm thuế'
     },
@@ -145,6 +146,7 @@ export const content = {
       deg1: 'Bachelor of Accounting & Auditing',
       deg2: 'Master Degree',
       deg3: 'Certificate of Merit from Ministry of Finance',
+      deg4: 'Tax Agent Certificate',
       exp: '12',
       expText: 'Years of tax experience'
     },
