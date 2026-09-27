@@ -3,14 +3,16 @@ import {
   Menu, X, Phone, MapPin, User, ArrowRight, ArrowUpRight, CheckCircle2, ChevronDown,
   Calculator, Settings2, ShieldCheck, Building2, Globe2,
   Scale, Compass, SearchCheck, Handshake,
-  RefreshCcw, ShoppingBag, Factory, HardHat, Store, UtensilsCrossed,
+  RefreshCcw, ShoppingBag, Factory, HardHat, Store, UtensilsCrossed, Laptop,
   Eye, Target, Zap, TriangleAlert,
 } from 'lucide-react';
 import logo from './assets/HN_logo.png';
 import { content as t, SERVICES_DATA, PROCESS_DATA, CUSTOMERS_DATA, DIFFERENTIATORS_DATA, STARTING_POINTS_DATA, COMMITMENTS_DATA } from './locales.js';
+import heroImg from './assets/hero-img.jpg';
 import directorImg from './assets/director.png';
 import bangCuNhan from './assets/bang_cu_nhan.png';
 import bangThacSi from './assets/bang_thac_si.png';
+import bangKhen1 from './assets/bangkhen_1.png';
 
 /* ---------------------------------------------------------------------
    Reveal: lightweight IntersectionObserver fade-in.
@@ -62,74 +64,19 @@ function PhotoPending({ label, ratio = 'aspect-[4/5]' }) {
    Data
 --------------------------------------------------------------------- */
 const NAV = [
-  { href: '#about', label: 'Giới thiệu' },
   { href: '#services', label: 'Dịch vụ' },
   { href: '#difference', label: 'Khác biệt' },
-  { href: '#customers', label: 'Khách hàng' },
+  { href: '#founder', label: 'Người sáng lập' },
   { href: '#process', label: 'Quy trình' },
 ];
 
 const SERVICES = [
-  {
-    img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
-    icon: Calculator,
-    title: 'Kế toán, thuế trọn gói',
-    note: 'Kế toán thuế định kỳ, tờ khai thuế, báo cáo tài chính và quyết toán thuế trọn gói.',
-    items: [
-      'Kế toán thuế định kỳ',
-      'Lập và nộp tờ khai thuế',
-      'Báo cáo tài chính, quyết toán thuế',
-      'Thuế GTGT, TNDN, TNCN',
-      'Hóa đơn điện tử',
-      'Theo dõi công nợ',
-      'Rà soát chứng từ, hóa đơn',
-      'Hỗ trợ tổ chức hệ thống sổ sách kế toán',
-    ],
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200',
-    icon: Settings2,
-    title: 'Thiết lập hệ thống kế toán',
-    note: 'Dành cho doanh nghiệp mới thành lập hoặc tổ chức lại. Xây dựng quy trình, kiểm soát dòng tiền và hướng dẫn nhân sự.',
-    items: [
-      'Xây dựng quy trình kế toán',
-      'Thiết lập chứng từ, tài khoản',
-      'Kiểm soát công nợ, dòng tiền',
-    ],
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=1200',
-    icon: ShieldCheck,
-    title: 'Tư vấn & Rà soát Rủi ro',
-    note: 'Rà soát hồ sơ thuế, chi phí, hóa đơn trước khi thanh tra. Tư vấn ưu đãi và hoàn thuế cho doanh nghiệp.',
-    items: [
-      'Rà soát hồ sơ, chi phí, thuế',
-      'Tư vấn ưu đãi, hoàn thuế',
-      'Hỗ trợ giải trình cơ quan thuế',
-    ],
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200',
-    icon: Building2,
-    title: 'Thành lập & thay đổi',
-    note: 'Thành lập doanh nghiệp, thay đổi đăng ký kinh doanh, tạm ngừng, giải thể.',
-    items: [
-      'Thành lập doanh nghiệp',
-      'Thay đổi đăng ký kinh doanh, thành viên, địa chỉ',
-      'Tạm ngừng, giải thể doanh nghiệp',
-    ],
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=1200',
-    icon: Globe2,
-    title: 'Doanh nghiệp FDI',
-    note: 'Kế toán, thuế, hồ sơ vốn nước ngoài, giấy phép lao động và visa.',
-    items: [
-      'Tư vấn kế toán, thuế cho doanh nghiệp có vốn nước ngoài',
-      'Hồ sơ vốn nước ngoài',
-      'Giấy phép lao động, visa, thẻ tạm trú',
-    ],
-  },
+  { icon: Building2 },
+  { icon: Calculator },
+  { icon: ShieldCheck },
+  { icon: Laptop },
+  { icon: Globe2 },
+  { icon: Settings2 },
 ];
 
 const QUESTIONS = [
@@ -250,10 +197,7 @@ function App() {
   const [expandedService, setExpandedService] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [lang, setLang] = useState('vi');
-  
-  // Create refs for scroll spy
-  const serviceRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
-  const activeServiceIndex = useScrollSpy(serviceRefs, { rootMargin: '-45% 0px -45% 0px' });
+  const [zoomedImg, setZoomedImg] = useState(null);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -320,6 +264,35 @@ function App() {
       <section id="top" className="relative pt-32 pb-20 md:pt-48 md:pb-32 bg-gray-100 flex items-center min-h-[90vh]">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <Reveal>
+            
+            {/* LOGO BLOCK - RECREATING THE SIGN */}
+            <div className="flex items-center gap-6 mb-12 mt-4 scale-90 md:scale-100 origin-left">
+              {/* Left: HN Logo with precise L-border drawn OVER the image's transparent padding */}
+              <div className="relative">
+                {/* Top horizontal line */}
+                <div className="absolute top-[13%] left-[4%] w-[68%] h-[3px] bg-[#A67C00] z-20"></div>
+                {/* Left vertical line */}
+                <div className="absolute top-[13%] left-[4%] w-[3px] h-[82%] bg-[#A67C00] z-20"></div>
+                <img src={logo} alt="HN" className="h-48 w-auto object-contain relative z-10" />
+              </div>
+
+              {/* Right: Text block */}
+              <div className="flex flex-col items-center justify-center -mt-2">
+                <div className="flex flex-col items-center text-[#A67C00]" style={{ textShadow: '1px 1px 2px rgba(0,0,0,0.15)' }}>
+                  <span className="text-[2rem] font-black font-sans leading-none tracking-widest uppercase" style={{ WebkitTextStroke: '1px #A67C00' }}>KẾ TOÁN</span>
+                  <span className="text-[2.25rem] font-black font-sans leading-[1.1] tracking-widest uppercase mt-1" style={{ WebkitTextStroke: '1.5px #A67C00' }}>HÂN NGUYỄN</span>
+                </div>
+                <div className="w-[110%] h-[1.5px] bg-[#A67C00] mt-3 mb-2"></div>
+                <p className="text-[11.5px] font-bold text-gray-600 uppercase tracking-[0.15em] mb-2 text-center whitespace-nowrap">
+                  Tuân thủ đúng - Yên tâm phát triển
+                </p>
+                <div className="flex items-center justify-center gap-2 text-[15px] font-bold text-[#A67C00] tracking-wider">
+                  <Phone size={16} className="fill-[#A67C00]" />
+                  0989 772 101
+                </div>
+              </div>
+            </div>
+
             <p className="text-gold font-medium tracking-widest uppercase mb-4 text-sm">
               {t[lang].hero.subtitle}
             </p>
@@ -343,9 +316,9 @@ function App() {
           <Reveal className="hidden md:block relative" delay={100}>
             <div className="aspect-[4/5] bg-gray-200 rounded-sm overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+                src={heroImg}
                 alt="Corporate Office"
-                className="object-cover w-full h-full grayscale opacity-80 mix-blend-multiply"
+                className="object-cover w-full h-full"
               />
               <div className="absolute inset-0 border-8 border-white/20" />
             </div>
@@ -357,33 +330,70 @@ function App() {
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
-      <section id="about" className="py-24 bg-white">
+      {/* SERVICES SECTION */}
+      <section id="services" className="py-24 bg-off-white">
         <div className="max-w-7xl mx-auto px-6">
-          <Reveal className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-6">{t[lang].system.title}</h2>
-            <p className="text-gray-500 leading-relaxed">
-              Một doanh nghiệp có thể thuê đơn vị kế toán để lập báo cáo. Nhưng một hệ thống kế toán tốt phải giúp doanh nghiệp trả lời được: Doanh thu ghi nhận đúng chưa? Dòng tiền có khớp không? Rủi ro thuế nằm ở đâu? Hân Nguyễn đồng hành để trả lời những câu hỏi đó.
-            </p>
-          </Reveal>
+          <div className="flex justify-between items-end mb-16">
+            <div>
+              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{t[lang].servicesSection.subtitle}</p>
+              <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold">{t[lang].servicesSection.title}</h2>
+            </div>
+          </div>
 
-          <Reveal className="grid sm:grid-cols-2 gap-x-10 gap-y-5 max-w-3xl mx-auto mb-20" delay={80}>
-            {QUESTIONS.map((q) => (
-              <div key={q} className="flex items-start gap-3">
-                <ArrowRight size={16} className="text-gold mt-1 shrink-0" />
-                <p className="text-gray-500 text-sm">{q}</p>
-              </div>
-            ))}
-          </Reveal>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 xl:gap-6">
+            {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => {
+              const Icon = s.icon;
+              return (
+                <Reveal key={s.title} delay={i * 100} className="bg-white border border-gray-100 p-5 xl:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 rounded-sm flex flex-col group">
+                  <div className="w-14 h-14 bg-gold-light/10 flex items-center justify-center text-gold mb-5 rounded-sm group-hover:bg-gold group-hover:text-white transition-colors duration-300">
+                    <Icon size={24} strokeWidth={1.5} />
+                  </div>
+                  <h3 className="text-[1.05rem] xl:text-lg font-serif text-dark font-bold mb-3 leading-snug">{s.title}</h3>
+                  <p className="text-gray-500 text-[13px] mb-5 leading-relaxed flex-grow">{s.note}</p>
+
+                  <div className="w-6 h-px bg-gold/30 mb-5"></div>
+
+                  <ul className="text-[12px] xl:text-[13px] text-gray-500 space-y-2.5">
+                    {s.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 font-medium">
+                        <CheckCircle2 size={13} className="text-gold shrink-0 mt-0.5" /> 
+                        <span className="leading-snug">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </section>
 
       {/* DIFFERENCE SECTION */}
       <section id="difference" className="py-24 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-6">
-          <Reveal className="text-center mb-16">
-            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{t[lang].diff.title}</p>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">{t[lang].diff.title}</h2>
+          <Reveal className="text-center mb-12 max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-8">{t[lang].diff.subtitle}</h2>
+            
+            <p className="text-gray-600 text-lg leading-relaxed mb-6">{t[lang].diff.intro1}</p>
+            <p className="text-dark font-medium text-lg leading-relaxed italic">{t[lang].diff.intro2}</p>
+          </Reveal>
+
+          <Reveal className="text-center mb-20 max-w-[1000px] mx-auto">
+            <div className="bg-off-white border border-gray-100 p-10 md:p-16 shadow-sm w-full relative">
+              <div className="absolute top-6 left-6 text-gold/10 font-serif text-8xl leading-none select-none">"</div>
+              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-6 relative z-10">{t[lang].diff.intro3}</p>
+              <p className="text-dark font-serif text-2xl md:text-4xl leading-normal md:leading-relaxed mb-10 italic relative z-10">{t[lang].diff.intro4}</p>
+              
+              <div className="w-24 h-px bg-gold/40 mx-auto mb-10 relative z-10"></div>
+              
+              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-4 relative z-10">{t[lang].diff.intro5}</p>
+              <p className="text-3xl md:text-5xl font-serif italic text-gold font-bold relative z-10">{t[lang].diff.intro6}</p>
+              <div className="absolute bottom-[-20px] right-8 text-gold/10 font-serif text-8xl leading-none select-none rotate-180">"</div>
+            </div>
+          </Reveal>
+
+          <Reveal className="text-center mb-12">
+            <h3 className="text-3xl md:text-4xl font-serif italic text-gold font-bold">{t[lang].diff.title}</h3>
           </Reveal>
           
           <div className="grid md:grid-cols-5 gap-6">
@@ -415,16 +425,33 @@ function App() {
             <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold mb-2">Nguyễn Thị Ngọc Hân</h2>
             <p className="text-gray-500 mb-8">{t[lang].founder.role}</p>
 
-            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-8">
-              {t[lang].founder.items.map((item) => (
+            <h3 className="font-bold text-dark mb-4 tracking-wide">{t[lang].founder.foundationTitle}</h3>
+            
+            {/* 4 short items in 2 columns with checkmarks */}
+            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3 mb-5">
+              {t[lang].founder.items.slice(0, 4).map((item) => (
                 <div key={item} className="flex items-start gap-2.5">
-                  <CheckCircle2 size={15} className="text-gold mt-0.5 shrink-0" />
-                  <span className="text-gray-600 text-sm">{item}</span>
+                  <CheckCircle2 size={18} className="text-gold mt-0.5 shrink-0" />
+                  <span className="text-gray-700 text-base font-medium">{item}</span>
                 </div>
               ))}
             </div>
 
-            <blockquote className="border-l-2 border-gold pl-6 italic text-gray-500 leading-relaxed font-serif">
+            {/* Remaining long items in 1 column with bullet points */}
+            <div className="flex flex-col gap-y-3 mb-6">
+              {t[lang].founder.items.slice(4).map((item) => (
+                <div key={item} className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-gold mt-2.5 shrink-0"></div>
+                  <span className="text-gray-600 text-base leading-relaxed">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-gray-700 font-medium text-lg mb-6 italic">
+              {t[lang].founder.extraRole}
+            </p>
+
+            <blockquote className="border-l-2 border-gold pl-6 text-lg italic text-gray-500 leading-relaxed font-serif">
               {t[lang].founder.quote}
             </blockquote>
           </Reveal>
@@ -433,93 +460,45 @@ function App() {
         <Reveal className="max-w-7xl mx-auto px-6 mt-24" delay={200}>
           <div className="border-t border-gray-100 pt-16">
             <h3 className="text-4xl md:text-5xl font-serif italic text-gold font-bold mb-12 text-center">{t[lang].founder.degrees}</h3>
-            <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-              <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              <div 
+                className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500 cursor-zoom-in"
+                onClick={() => setZoomedImg(bangCuNhan)}
+              >
                 <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
                 <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
-                  <img src={bangCuNhan} alt="{t[lang].founder.deg1}" className="w-full h-auto object-contain drop-shadow-md" />
+                  <img src={bangCuNhan} alt={t[lang].founder.deg1} className="w-full h-auto object-contain drop-shadow-md" />
                 </div>
-                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">Cử nhân Kế toán, Kiểm toán</p>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg1}</p>
                 <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
               </div>
               
-              <div className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500">
+              <div 
+                className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500 cursor-zoom-in"
+                onClick={() => setZoomedImg(bangThacSi)}
+              >
                 <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
                 <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
-                  <img src={bangThacSi} alt="{t[lang].founder.deg2}" className="w-full h-auto object-contain drop-shadow-md" />
+                  <img src={bangThacSi} alt={t[lang].founder.deg2} className="w-full h-auto object-contain drop-shadow-md" />
                 </div>
                 <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg2}</p>
+                <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
+              </div>
+
+              <div 
+                className="bg-white p-6 shadow-2xl rounded-sm border border-gold/20 relative group hover:-translate-y-2 transition-transform duration-500 cursor-zoom-in"
+                onClick={() => setZoomedImg(bangKhen1)}
+              >
+                <div className="absolute inset-0 border border-gold/50 m-2 pointer-events-none rounded-sm"></div>
+                <div className="relative border border-gold/20 bg-gray-50 p-4 shadow-inner">
+                  <img src={bangKhen1} alt={t[lang].founder.deg3} className="w-full h-auto object-contain drop-shadow-md" />
+                </div>
+                <p className="text-center mt-6 text-sm font-bold text-dark uppercase tracking-widest font-serif relative z-10">{t[lang].founder.deg3}</p>
                 <div className="w-12 h-px bg-gold/50 mx-auto mt-3"></div>
               </div>
             </div>
           </div>
         </Reveal>
-      </section>
-
-      {/* SERVICES SECTION */}
-      <section id="services" className="py-24 bg-off-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-16">
-            <div>
-              <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{t[lang].servicesSection.subtitle}</p>
-              <h2 className="text-5xl md:text-6xl font-serif italic text-gold font-bold">{t[lang].servicesSection.title}</h2>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-12 gap-8 md:gap-16 items-start relative">
-            {/* Sticky Image on the Left */}
-            <div className="hidden md:block md:col-span-5 sticky top-32 z-10 h-[60vh]">
-              <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100">
-                {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => (
-                  <img 
-                    key={s.title}
-                    src={s.img} 
-                    alt={s.title}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${activeServiceIndex === i ? 'opacity-100' : 'opacity-0'}`}
-                  />
-                ))}
-                <div className="absolute inset-0 bg-dark/20 mix-blend-multiply" />
-              </div>
-            </div>
-            
-            {/* Scrollable Content on the Right */}
-            <div className="md:col-span-7 pb-32">
-              {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => {
-                const Icon = s.icon;
-                const isActive = activeServiceIndex === i;
-                return (
-                  <div 
-                    key={s.title} 
-                    ref={serviceRefs[i]}
-                    className={`py-16 md:py-32 border-b border-gray-200/50 transition-all duration-300 ease-out relative ${isActive ? '' : ''}`}
-                  >
-                    {/* Active Indicator Line */}
-                    <div className={`absolute left-[-2rem] top-1/2 -translate-y-1/2 w-1 h-24 bg-gold transition-opacity duration-300 rounded-r-sm hidden md:block ${isActive ? 'opacity-100' : 'opacity-0'}`} />
-
-                    {/* Mobile Image */}
-                    <div className="block md:hidden w-full h-48 mb-8 rounded-sm overflow-hidden shadow-md">
-                      <img src={s.img} alt={s.title} className="w-full h-full object-cover" />
-                    </div>
-
-                    <div className="w-16 h-16 bg-gold-light/20 flex items-center justify-center text-gold mb-8 rounded-sm">
-                      <Icon size={32} strokeWidth={1.5} />
-                    </div>
-                    <h3 className="text-3xl font-serif text-dark font-bold mb-6">{s.title}</h3>
-                    <p className="text-gray-500 text-base mb-8 leading-relaxed max-w-lg">{s.note}</p>
-
-                    <ul className="text-sm text-gray-500 space-y-4 border-l-2 border-gold/30 pl-6">
-                      {s.items.map((item) => (
-                        <li key={item} className="flex items-center gap-3 font-medium">
-                          <CheckCircle2 size={16} className="text-gold shrink-0" /> {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* PROCESS SECTION */}
@@ -543,42 +522,6 @@ function App() {
                 <p className="text-xs text-gray-500 leading-relaxed transition-opacity duration-500">{p.desc}</p>
               </Reveal>
             ))}
-          </div>
-
-          <Reveal className="mt-20 max-w-4xl mx-auto bg-off-white border border-gray-100 p-8 md:p-10" delay={200}>
-            <p className="text-xl font-serif italic text-gold font-bold mb-6">{t[lang].process.start}</p>
-            <div className="grid sm:grid-cols-2 gap-x-10 gap-y-4">
-              {STARTING_POINTS_DATA[lang].map(([left, right]) => (
-                <div key={left} className="flex flex-col gap-1">
-                  <span className="font-semibold text-sm text-dark">{left}</span>
-                  <span className="flex items-center gap-2 text-sm text-gold">
-                    <ArrowRight size={13} className="shrink-0" /> {right}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* CUSTOMERS SECTION */}
-      <section id="customers" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal className="text-center mb-16">
-            <p className="text-gold text-sm tracking-widest uppercase font-medium mb-2">{lang === 'vi' ? 'Phù hợp với' : 'Suitable for'}</p>
-            <h2 className="text-4xl md:text-5xl font-serif italic text-gold font-bold">{t[lang].customers.title}</h2>
-          </Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10">
-            {CUSTOMERS_DATA[lang].map((c, i) => { c.icon = CUSTOMERS[i].icon; return c; }).map((c, i) => {
-              const Icon = c.icon;
-              return (
-                <Reveal key={c.title} delay={(i % 4) * 60}>
-                  <Icon size={24} className="text-gold mb-4" strokeWidth={1.5} />
-                  <h3 className="font-semibold text-sm text-dark leading-snug">{c.title}</h3>
-                  <p className="text-xs text-gray-500 mt-2 leading-relaxed">{c.desc}</p>
-                </Reveal>
-              );
-            })}
           </div>
         </div>
       </section>
@@ -666,9 +609,23 @@ function App() {
           </Reveal>
         </div>
         <div className="max-w-7xl mx-auto px-6 border-t border-gray-800 pt-8 text-center text-xs text-gray-600">
-          &copy; 2026 Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn. All rights reserved.
+          &copy; 2026 Công ty TNHH Kế toán và tư vấn thuế Hân Nguyễn. All rights reserved.
         </div>
       </footer>
+
+      {/* ZOOM MODAL */}
+      {zoomedImg && (
+        <div 
+          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out backdrop-blur-sm"
+          onClick={() => setZoomedImg(null)}
+        >
+          <img 
+            src={zoomedImg} 
+            alt="Zoomed Certificate" 
+            className="max-w-[95vw] max-h-[95vh] object-contain drop-shadow-2xl rounded-sm"
+          />
+        </div>
+      )}
     </div>
   );
 }
