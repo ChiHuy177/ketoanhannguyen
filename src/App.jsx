@@ -340,11 +340,15 @@ function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 xl:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-4 xl:gap-6">
             {SERVICES_DATA[lang].map((s, i) => { s.icon = SERVICES[i].icon; return s; }).map((s, i) => {
               const Icon = s.icon;
               return (
-                <Reveal key={s.title} delay={i * 100} className="bg-white border border-gray-100 p-5 xl:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 rounded-sm flex flex-col group">
+                <Reveal 
+                  key={s.title} 
+                  delay={i * 100} 
+                  className={`bg-white border border-gray-100 p-5 xl:p-6 shadow-[0_2px_10px_rgba(0,0,0,0.02)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 rounded-sm flex flex-col group lg:col-span-2 ${i === 4 ? 'lg:col-start-3' : ''}`}
+                >
                   <div className="w-14 h-14 bg-gold-light/10 flex items-center justify-center text-gold mb-5 rounded-sm group-hover:bg-gold group-hover:text-white transition-colors duration-300">
                     <Icon size={24} strokeWidth={1.5} />
                   </div>
