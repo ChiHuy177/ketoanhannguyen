@@ -7,14 +7,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        gold: '#C5A059',
-        'gold-light': '#E8D5A5',
-        dark: '#1a1a1a',
-        'off-white': '#FAFAFA'
+        navy: {
+          DEFAULT: '#224DA7',
+          dark: '#1A2B55',
+        },
+        gold: {
+          light: '#E8C766',
+          DEFAULT: '#C9A227',
+          dark: '#B8860B',
+          bar: '#A67C1A',
+        },
+        cream: {
+          DEFAULT: '#FAF6EC',
+          warm: '#FDF1DF',
+          peach: '#F4E2C7',
+        },
+        seal: '#B23A2E',
+        panel: '#363B45',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        sans: ['Work Sans', 'sans-serif'],
+        display: ['Barlow Condensed', 'sans-serif'],
       }
     }
   },

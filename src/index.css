@@ -13,6 +13,11 @@ html {
   }
 }
 
+body {
+  background: #faf6ec;
+  color: #1b1b1b;
+}
+
 /* Reveal-on-scroll: toggled by the useReveal IntersectionObserver hook. */
 .reveal {
   opacity: 0;
@@ -59,9 +64,9 @@ html {
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .card-hover:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 40px -10px rgba(197, 160, 89, 0.2);
-  border-color: #c5a059;
+  transform: translateY(-4px);
+  box-shadow: 0 22px 40px -18px rgba(26, 43, 85, 0.3);
+  border-color: #c9a227;
 }
 @media (prefers-reduced-motion: reduce) {
   .card-hover {
@@ -72,12 +77,14 @@ html {
   }
 }
 
-/* Honest placeholder panel for photos not yet supplied (founder portrait, office/team). */
-.photo-pending {
-  position: relative;
-  background: linear-gradient(160deg, #fafafa, #f5e9d0);
-  border: 1px solid rgba(197, 160, 89, 0.35);
+/* Faint gold diamond lattice — the reference's recurring decorative texture (hero, founder). */
+.lattice {
+  background-image:
+    repeating-linear-gradient(45deg, rgba(201, 162, 39, 0.55) 0 1px, transparent 1px 64px),
+    repeating-linear-gradient(-45deg, rgba(201, 162, 39, 0.55) 0 1px, transparent 1px 64px);
 }
-.photo-pending .mark {
-  opacity: 0.16;
+
+/* Gold ribbon band for the company motto — exact stops from the reference. */
+.ribbon-gold {
+  background: linear-gradient(90deg, rgba(232, 199, 102, 0) 0%, rgba(232, 199, 102, .55) 28%, rgba(232, 199, 102, .75) 50%, rgba(232, 199, 102, .55) 72%, rgba(232, 199, 102, 0) 100%);
 }
