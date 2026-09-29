@@ -96,7 +96,7 @@ function App() {
   const certItems = [
     { img: bangThacSi, title: lang === 'vi' ? 'Thạc sĩ' : 'Master' },
     { img: bangKhen2, title: lang === 'vi' ? 'Chứng chỉ Đại lý thuế' : 'Tax Agent Cert.' },
-    { img: bangKhen1, title: lang === 'vi' ? 'Giấy khen Cục thuế' : 'Tax Dept. Award' },
+    { img: bangKhen1, title: lang === 'vi' ? 'Bằng khen Bộ Tài Chính' : 'Tax Dept. Award' },
   ];
 
   const nextCert = () => setCertIdx((prev) => (prev + 1) % certItems.length);
@@ -494,14 +494,14 @@ function App() {
 
             <Reveal delay={100} className="flex-none w-full lg:w-[50%] xl:w-[55%] relative mt-4 lg:mt-0">
               <div className="absolute top-4 -right-4 bottom-4 -left-4 md:-right-5 md:top-5 md:-bottom-5 md:left-5 rounded-[16px] pointer-events-none hidden md:block" style={{ border: '2px solid rgba(201,162,39,0.3)' }}></div>
-              <div 
+              <div
                 className="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-[16px] group"
                 style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.05)' }}
               >
                 {/* Cinematic filters */}
                 <div className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply opacity-20 transition-opacity duration-500 group-hover:opacity-0" style={{ background: '#1A3C8A' }}></div>
                 <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(20,34,72,0.6) 0%, transparent 40%)' }}></div>
-                
+
                 <img src={hinhDoiNhom} alt="Đội ngũ chuyên nghiệp" className="w-full h-full object-cover relative z-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
               </div>
             </Reveal>
