@@ -1,5 +1,6 @@
 export const content = {
   vi: {
+    pageTitle: 'Kế Toán Hân Nguyễn | Kế toán, Thuế, Tư vấn Doanh nghiệp',
     nav: {
       about: 'Giới thiệu',
       services: 'Dịch vụ',
@@ -30,7 +31,7 @@ export const content = {
       intro3: 'Mục tiêu của Hân Nguyễn là:',
       intro4: 'Thiết lập một hệ thống kế toán hoàn chỉnh và thông suốt cho doanh nghiệp từ nội bộ đến tờ khai báo cáo đầy đủ nhất phục vụ cho công tác thanh tra kiểm tra',
       intro5: 'Với phương châm:',
-      intro6: 'TUÂN THỦ ĐÚNG – AN TÂM PHÁT TRIỂN'
+      intro6: 'TUÂN THỦ ĐÚNG – YÊN TÂM PHÁT TRIỂN'
     },
     founder: {
       subtitle: 'Người sáng lập',
@@ -41,11 +42,12 @@ export const content = {
         'Thạc sĩ Tài chính Ngân hàng',
         'Chứng chỉ Kế toán trưởng',
         'Chứng chỉ Đại lý thuế',
-        'Kinh nghiệm 12 năm công tác tại cơ quan thuế cấp tỉnh hướng dẫn, kiểm soát hồ sơ kế toán, thuế của hàng ngàn doanh nghiệp với các loại hình khác nhau và từng trực tiếp tham gia đoàn kiểm tra của cơ quan thuế với vai trò là trưởng đoàn kiểm tra.',
-        'Kinh nghiệm làm kế toán của doanh nghiệp nước ngoài, doanh nghiệp bán lẻ với chuỗi hơn 200 cửa hàng',
-        'Có kinh nghiệm tư vấn, rà soát hồ sơ thuế và thiết lập hệ thống cho nhiều doanh nghiệp'
+        '12 năm kinh nghiệm công tác tại cơ quan thuế cấp tỉnh, trực tiếp hướng dẫn, kiểm soát hồ sơ kế toán – thuế của hàng nghìn doanh nghiệp thuộc nhiều lĩnh vực và loại hình khác nhau; từng tham gia các đoàn kiểm tra thuế với vai trò Trưởng đoàn kiểm tra.',
+        'Kinh nghiệm thực tế trong lĩnh vực kế toán doanh nghiệp, bao gồm doanh nghiệp có vốn nước ngoài và doanh nghiệp bán lẻ với hệ thống hơn 200 cửa hàng.',
+        'Kinh nghiệm tư vấn, rà soát hồ sơ kế toán – thuế và thiết lập hệ thống kế toán, hỗ trợ nhiều doanh nghiệp xây dựng quy trình và chuẩn hóa dữ liệu kế toán, thuế.',
+        'Giảng viên các chương trình đào tạo Kế toán – Thuế thực chiến, tập trung vào việc kết hợp kiến thức pháp lý với tình huống và hồ sơ thực tế của doanh nghiệp.'
       ],
-      extraRole: 'Là Giảng viên của nhiều lớp đào tạo Kế toán, thuế thực chiến.',
+      extraRole: '',
       quote: 'Với mong muốn: "Tư vấn kế toán – thuế không chỉ là xử lý một bộ hồ sơ. Điều quan trọng là phải hiểu hoạt động thực tế của doanh nghiệp, xác định đúng bản chất giao dịch và xây dựng phương án phù hợp với quy định pháp luật."',
       degrees: 'Bằng Cấp & Chứng Nhận',
       deg1: 'Cử nhân Kế toán, Kiểm toán',
@@ -54,6 +56,11 @@ export const content = {
       deg4: 'Chứng chỉ Đại lý Thuế',
       exp: '12',
       expText: 'Năm kinh nghiệm thuế'
+    },
+    team: {
+      title: 'ĐỘI NGŨ CHUYÊN NGHIỆP',
+      desc1: 'Đội ngũ của chúng tôi quy tụ những nhân sự có nền tảng chuyên môn kế toán từ Đại học trở lên, giàu tinh thần trách nhiệm và luôn chủ động cập nhật kiến thức, quy định pháp luật.',
+      desc2: 'Với sự tận tâm, chính xác và chuyên nghiệp, chúng tôi cam kết đồng hành cùng khách hàng trong từng công việc, mang đến những giải pháp kế toán – thuế minh bạch, hiệu quả và bền vững.'
     },
     servicesSection: {
       subtitle: 'Chuyên môn của chúng tôi',
@@ -99,6 +106,7 @@ export const content = {
     }
   },
   en: {
+    pageTitle: 'Han Nguyen Accounting | Accounting, Tax, Business Consulting',
     nav: {
       about: 'About',
       services: 'Services',
@@ -149,6 +157,11 @@ export const content = {
       deg4: 'Tax Agent Certificate',
       exp: '12',
       expText: 'Years of tax experience'
+    },
+    team: {
+      title: 'PROFESSIONAL TEAM',
+      desc1: 'Our team gathers professionals with accounting backgrounds from university level upwards, with a strong sense of responsibility and proactive updates on knowledge and legal regulations.',
+      desc2: 'With dedication, accuracy, and professionalism, we are committed to accompanying clients in every task, delivering transparent, effective, and sustainable accounting and tax solutions.'
     },
     servicesSection: {
       subtitle: 'Our Expertise',
@@ -212,7 +225,7 @@ export const SERVICES_DATA = {
     {
       img: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=1200',
       title: 'Kế toán – Thuế trọn gói',
-      note: 'Giải pháp toàn diện giúp doanh nghiệp an tâm hoạt động.',
+      note: 'Giải pháp toàn diện giúp doanh nghiệp yên tâm hoạt động.',
       items: [
         'Tư vấn tối ưu thuế',
         'Tư vấn thiết lập hệ thống kế toán',
@@ -242,7 +255,8 @@ export const SERVICES_DATA = {
         'Hóa đơn điện tử',
         'Phần mềm bán hàng',
         'Phần mềm kế toán',
-        'Phần mềm BHXH'
+        'Phần mềm BHXH',
+        'Thiết kế website theo yêu cầu'
       ]
     },
     {
@@ -310,7 +324,8 @@ export const SERVICES_DATA = {
         'Electronic invoice',
         'Sales software',
         'Accounting software',
-        'Social insurance software'
+        'Social insurance software',
+        'Custom website design'
       ]
     },
     {

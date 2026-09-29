@@ -26,8 +26,8 @@ export default {
         panel: '#363B45',
       },
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
-        display: ['Barlow Condensed', 'sans-serif'],
+        sans: ['"Be Vietnam Pro"', 'sans-serif'],
+        display: ['"Be Vietnam Pro"', 'sans-serif'],
       }
     }
   },

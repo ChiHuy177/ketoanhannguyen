@@ -14,6 +14,7 @@ import bangCuNhan from './assets/bang_cu_nhan.png';
 import bangThacSi from './assets/bang_thac_si.png';
 import bangKhen1 from './assets/bangkhen_1.png';
 import bangKhen2 from './assets/bangkhen_2.png';
+import hinhDoiNhom from './assets/hinh_doi_nhom.png';
 import { content as t, SERVICES_DATA, PROCESS_DATA, DIFFERENTIATORS_DATA, COMMITMENTS_DATA } from './locales.js';
 
 /* ---------------------------------------------------------------------
@@ -88,11 +89,14 @@ function App() {
   const [zoomedImg, setZoomedImg] = useState(null);
   const [certIdx, setCertIdx] = useState(0);
 
+  useEffect(() => {
+    document.title = t[lang].pageTitle;
+  }, [lang]);
+
   const certItems = [
-    { img: bangCuNhan,  title: lang === 'vi' ? 'Cử nhân' : 'Bachelor' },
-    { img: bangThacSi,  title: lang === 'vi' ? 'Thạc sĩ' : 'Master' },
-    { img: bangKhen2,   title: lang === 'vi' ? 'Chứng chỉ Đại lý thuế' : 'Tax Agent Cert.' },
-    { img: bangKhen1,   title: lang === 'vi' ? 'Giấy khen Cục thuế' : 'Tax Dept. Award' },
+    { img: bangThacSi, title: lang === 'vi' ? 'Thạc sĩ' : 'Master' },
+    { img: bangKhen2, title: lang === 'vi' ? 'Chứng chỉ Đại lý thuế' : 'Tax Agent Cert.' },
+    { img: bangKhen1, title: lang === 'vi' ? 'Giấy khen Cục thuế' : 'Tax Dept. Award' },
   ];
 
   const nextCert = () => setCertIdx((prev) => (prev + 1) % certItems.length);
@@ -227,7 +231,7 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <Reveal className="mb-10">
-            <h2 className="font-display font-extrabold uppercase text-[33px] tracking-[1px]" style={{ color: '#224DA7' }}>
+            <h2 className="font-display font-bold uppercase text-[33px] tracking-[1px]" style={{ color: '#224DA7' }}>
               {t[lang].servicesSection.title}
             </h2>
           </Reveal>
@@ -254,10 +258,10 @@ function App() {
                   <Icon size={44} strokeWidth={1.3} color="#C9A227" />
 
                   <h3 className="font-extrabold text-[17px] leading-tight uppercase" style={{ color: '#224DA7' }}>{s.title}</h3>
-                  <p className="text-[15px] leading-relaxed" style={{ color: '#5F594C' }}>{s.note}</p>
+                  <p className="text-[16px] leading-[1.6]" style={{ color: '#5F594C' }}>{s.note}</p>
                   <ul className="flex flex-col gap-2 text-left w-full">
                     {s.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-[14.5px] font-medium" style={{ color: '#3A3A3A' }}>
+                      <li key={item} className="flex items-start gap-2 text-[16px] font-medium leading-[1.6]" style={{ color: '#3A3A3A' }}>
                         <CheckCircle2 size={13} color="#C9A227" className="shrink-0 mt-0.5" />
                         <span className="leading-snug">{item}</span>
                       </li>
@@ -304,12 +308,12 @@ function App() {
         />
         <div className="relative z-[1] max-w-7xl mx-auto px-6 md:px-10">
           <Reveal className="max-w-2xl mx-auto text-center mb-6">
-            <h2 className="font-display font-extrabold uppercase text-[28px] md:text-[34px] tracking-[0.5px]" style={{ color: '#E8C766' }}>{t[lang].diff.subtitle}</h2>
+            <h2 className="font-display font-bold uppercase text-[28px] md:text-[34px] tracking-[0.5px]" style={{ color: '#E8C766' }}>{t[lang].diff.subtitle}</h2>
           </Reveal>
 
           <div className="max-w-2xl mx-auto flex flex-col gap-4 text-center mb-16">
             <Reveal>
-              <p className="text-lg leading-relaxed" style={{ color: '#F4E2C7' }}>{t[lang].diff.intro1}</p>
+              <p className="text-[17px] leading-[1.6]" style={{ color: '#F4E2C7' }}>{t[lang].diff.intro1}</p>
             </Reveal>
             <Reveal delay={80}>
               <p className="font-extrabold text-[18px] leading-snug" style={{ color: '#E8C766', textWrap: 'balance' }}>{t[lang].diff.intro2}</p>
@@ -343,7 +347,7 @@ function App() {
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <Reveal>
-            <h3 className="font-display font-extrabold uppercase text-3xl md:text-4xl text-center mb-10" style={{ color: '#224DA7' }}>{t[lang].diff.title}</h3>
+            <h3 className="font-display font-bold uppercase text-3xl md:text-4xl text-center mb-10" style={{ color: '#224DA7' }}>{t[lang].diff.title}</h3>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {DIFFERENTIATORS_DATA[lang].map((d, i) => {
@@ -354,7 +358,7 @@ function App() {
                     <Icon size={19} strokeWidth={1.6} color="#C9A227" />
                   </div>
                   <h4 className="text-[15px] font-bold uppercase tracking-wide mb-2" style={{ color: '#224DA7' }}>{d.title}</h4>
-                  <p className="text-[15px] leading-relaxed" style={{ color: '#5F594C' }}>{d.desc}</p>
+                  <p className="text-[16px] leading-[1.6]" style={{ color: '#5F594C' }}>{d.desc}</p>
                 </Reveal>
               );
             })}
@@ -406,14 +410,14 @@ function App() {
               </div>
 
               <div>
-                <p className="font-display font-extrabold text-[17px] tracking-[0.5px] uppercase mb-3.5" style={{ color: '#224DA7' }}>
+                <p className="font-bold text-[18px] uppercase mb-3.5" style={{ color: '#224DA7' }}>
                   {t[lang].founder.foundationTitle || (lang === 'vi' ? 'Nền tảng chuyên môn' : 'Professional foundation')}
                 </p>
                 <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3">
                   {t[lang].founder.items.slice(0, 4).map((item) => (
                     <div key={item} className="flex items-center gap-2.5">
                       <CheckCircle2 size={17} color="#C9A227" className="shrink-0" />
-                      <span className="text-[15px]" style={{ color: '#3A3A3A' }}>{item}</span>
+                      <span className="text-[16px] leading-[1.6]" style={{ color: '#3A3A3A' }}>{item}</span>
                     </div>
                   ))}
                 </div>
@@ -421,15 +425,23 @@ function App() {
 
               <ul className="flex flex-col gap-2.5">
                 {t[lang].founder.items.slice(4).map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[15px] leading-relaxed" style={{ color: '#3A3A3A' }}>
-                    <span className="shrink-0 w-[6px] h-[6px] rounded-full mt-[8px]" style={{ background: '#C9A227' }} />
-                    {item}
+                  <li key={item} className="flex items-start gap-3 text-[16px] leading-[1.6]" style={{ color: '#3A3A3A' }}>
+                    <span className="shrink-0 w-[6px] h-[6px] rounded-full mt-[10px]" style={{ background: '#C9A227' }} />
+                    <span>
+                      {typeof item === 'string' && item.includes('Trưởng đoàn kiểm tra') ? (
+                        <>
+                          {item.split('Trưởng đoàn kiểm tra')[0]}
+                          <span className="font-semibold">Trưởng đoàn kiểm tra</span>
+                          {item.split('Trưởng đoàn kiểm tra')[1]}
+                        </>
+                      ) : item}
+                    </span>
                   </li>
                 ))}
               </ul>
 
               {t[lang].founder.extraRole && (
-                <p className="font-extrabold text-[18px] leading-snug" style={{ color: '#224DA7' }}>
+                <p className="font-semibold text-[18px] leading-snug" style={{ color: '#224DA7' }}>
                   {t[lang].founder.extraRole}
                 </p>
               )}
@@ -437,6 +449,59 @@ function App() {
               <blockquote className="italic text-[17.5px] leading-relaxed" style={{ color: '#5F594C', borderLeft: '2px solid #C9A227', paddingLeft: '18px' }}>
                 {t[lang].founder.quote}
               </blockquote>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM SECTION */}
+      <section
+        className="relative overflow-hidden py-20"
+        style={{
+          background: 'radial-gradient(55% 80% at 8% 0%, rgba(74,105,171,0.4), transparent 60%),' +
+            'radial-gradient(60% 70% at 100% 100%, rgba(20,34,72,0.75), transparent 70%),' +
+            'linear-gradient(135deg, #1A3C8A 0%, #16305F 100%)',
+        }}
+      >
+        <div
+          className="lattice absolute inset-0 pointer-events-none"
+          style={{
+            opacity: 0.35,
+            WebkitMaskImage: 'radial-gradient(75% 100% at 50% 0%, #000 0%, transparent 90%)',
+            maskImage: 'radial-gradient(75% 100% at 50% 0%, #000 0%, transparent 90%)',
+          }}
+        />
+        <div className="relative z-[1] max-w-7xl mx-auto px-6 md:px-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <Reveal className="flex-1 flex flex-col gap-5 text-center lg:text-left">
+              <div className="w-[52px] h-[52px] rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-2" style={{ background: '#FDF1DF', boxShadow: '0 6px 14px rgba(0,0,0,0.3)' }}>
+                <Award size={24} strokeWidth={1.8} color="#C9A227" />
+              </div>
+              <h2 className="font-display font-bold uppercase text-3xl md:text-4xl tracking-[0.5px] mb-2" style={{ color: '#E8C766' }}>
+                {t[lang].team.title}
+              </h2>
+              <div className="flex flex-col gap-4">
+                <p className="text-[17px] leading-[1.6]" style={{ color: '#F4E2C7' }}>
+                  {t[lang].team.desc1}
+                </p>
+                <p className="text-[17px] font-semibold leading-[1.6]" style={{ color: '#E8C766' }}>
+                  {t[lang].team.desc2}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={100} className="flex-none w-full lg:w-[50%] xl:w-[55%] relative mt-4 lg:mt-0">
+              <div className="absolute top-4 -right-4 bottom-4 -left-4 md:-right-5 md:top-5 md:-bottom-5 md:left-5 rounded-[16px] pointer-events-none hidden md:block" style={{ border: '2px solid rgba(201,162,39,0.3)' }}></div>
+              <div 
+                className="relative w-full aspect-[4/3] md:aspect-[16/10] overflow-hidden rounded-[16px] group"
+                style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.05)' }}
+              >
+                {/* Cinematic filters */}
+                <div className="absolute inset-0 z-10 pointer-events-none mix-blend-multiply opacity-20 transition-opacity duration-500 group-hover:opacity-0" style={{ background: '#1A3C8A' }}></div>
+                <div className="absolute inset-0 z-10 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(20,34,72,0.6) 0%, transparent 40%)' }}></div>
+                
+                <img src={hinhDoiNhom} alt="Đội ngũ chuyên nghiệp" className="w-full h-full object-cover relative z-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+              </div>
             </Reveal>
           </div>
         </div>
@@ -462,7 +527,7 @@ function App() {
         />
         <div className="relative z-[1] max-w-7xl mx-auto px-6 md:px-10">
           <Reveal>
-            <h2 className="font-display font-extrabold uppercase text-4xl md:text-5xl text-center mb-14" style={{ color: '#224DA7' }}>{t[lang].process.title}</h2>
+            <h2 className="font-display font-bold uppercase text-4xl md:text-5xl text-center mb-14" style={{ color: '#224DA7' }}>{t[lang].process.title}</h2>
           </Reveal>
 
           <div className="relative grid grid-cols-2 md:grid-cols-7 gap-y-9 gap-x-2">
@@ -479,7 +544,7 @@ function App() {
                   {i + 1}
                 </div>
                 <h4 className="text-[14.5px] font-bold uppercase tracking-wide mb-1.5" style={{ color: '#224DA7' }}>{p.title}</h4>
-                <p className="text-[14.5px] leading-relaxed" style={{ color: '#5F594C' }}>{p.desc}</p>
+                <p className="text-[16px] leading-[1.6]" style={{ color: '#5F594C' }}>{p.desc}</p>
               </Reveal>
             ))}
           </div>
@@ -505,7 +570,7 @@ function App() {
         />
         <div className="relative z-[1] max-w-7xl mx-auto px-6 md:px-10">
           <Reveal className="max-w-2xl mx-auto text-center mb-14">
-            <h2 className="font-display font-extrabold uppercase text-4xl md:text-5xl mb-3" style={{ color: '#E8C766' }}>{t[lang].commit.title}</h2>
+            <h2 className="font-display font-bold uppercase text-4xl md:text-5xl mb-3" style={{ color: '#E8C766' }}>{t[lang].commit.title}</h2>
             <p style={{ color: '#F4E2C7' }}>{lang === 'vi' ? 'Hân Nguyễn hướng đến việc xây dựng mối quan hệ lâu dài với doanh nghiệp trên cơ sở:' : 'Han Nguyen aims to build long-term relationships with businesses based on:'}</p>
           </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -517,7 +582,7 @@ function App() {
                     <Icon size={21} strokeWidth={1.6} color="#C9A227" />
                   </div>
                   <p className="font-bold text-[15px] uppercase tracking-wide mb-1.5" style={{ color: '#FDF1DF' }}>{c.title}</p>
-                  <p className="text-[14.5px] leading-relaxed" style={{ color: '#F4E2C7' }}>{c.desc}</p>
+                  <p className="text-[16px] leading-[1.6]" style={{ color: '#F4E2C7' }}>{c.desc}</p>
                 </Reveal>
               );
             })}
@@ -587,7 +652,7 @@ function App() {
                       <div key={item.title + offset} className="flex flex-col items-center gap-2.5">
                         {/* Gold picture-frame border wrapping the real cert scan */}
                         <div
-                          className="w-full cursor-zoom-in transition-all duration-200 hover:-translate-y-1"
+                          className="w-full h-[180px] sm:h-[200px] cursor-zoom-in transition-all duration-200 hover:-translate-y-1 flex flex-col"
                           style={{
                             padding: '6px',
                             background: 'linear-gradient(145deg, #F3DF9A 0%, #C9A038 50%, #E8D080 100%)',
@@ -596,16 +661,15 @@ function App() {
                           }}
                           onClick={() => setZoomedImg(item.img)}
                         >
-                          <div style={{ background: '#FDFAF3', padding: '4px', borderRadius: '2px' }}>
+                          <div className="w-full flex-1 flex items-center justify-center overflow-hidden" style={{ background: '#FDFAF3', padding: '6px', borderRadius: '2px' }}>
                             <img
                               src={item.img}
                               alt={item.title}
-                              className="w-full h-auto block object-contain"
-                              style={{ maxHeight: '160px' }}
+                              className="max-w-full max-h-full block object-contain"
                             />
                           </div>
                         </div>
-                        <span className="font-bold text-[15.5px] text-[#111111] text-center tracking-tight">
+                        <span className="font-bold text-[16px] text-[#111111] text-center tracking-tight">
                           {item.title}
                         </span>
                       </div>
@@ -691,25 +755,25 @@ function App() {
                 </p>
                 <a
                   href="tel:0989772101"
-                  className="flex items-center gap-2.5 text-[15.5px] font-semibold text-white hover:text-[#E6C870] transition"
+                  className="flex items-center gap-2.5 text-[16px] font-semibold text-white hover:text-[#E6C870] transition"
                 >
                   <Phone size={16} className="text-[#E6C870] fill-current shrink-0" />
                   0989 772 101
                 </a>
                 <a
                   href="mailto:hannguyenkt2407@gmail.com"
-                  className="flex items-center gap-2.5 text-[15.5px] text-white hover:text-[#E6C870] transition"
+                  className="flex items-center gap-2.5 text-[16px] text-white hover:text-[#E6C870] transition"
                 >
                   <Mail size={16} className="text-[#E6C870] shrink-0" />
                   hannguyenkt2407@gmail.com
                 </a>
-                <p className="flex items-start gap-2.5 text-[15.5px] leading-snug text-white">
+                <p className="flex items-start gap-2.5 text-[16px] leading-snug text-white">
                   <MapPin size={16} className="text-[#E6C870] mt-0.5 shrink-0" />
                   {lang === 'vi'
                     ? 'Số 22, khu Tái định cư An Bình, phường An Bình, Cần Thơ'
                     : 'No. 22, An Binh Resettlement Area, An Binh Ward, Can Tho City'}
                 </p>
-                <p className="text-[14.5px] leading-relaxed text-[#EDE5DB] mt-0.5">
+                <p className="text-[16px] leading-[1.6] text-[#EDE5DB] mt-0.5">
                   {lang === 'vi'
                     ? 'Hân hạnh phục vụ quý khách hàng trên phạm vi toàn quốc.'
                     : 'Proudly serving clients nationwide.'}
@@ -729,7 +793,7 @@ function App() {
                   <rect width="300" height="180" fill="#e8e4dc" />
                   <defs>
                     <pattern id="mapGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#fff" strokeWidth="0.8" opacity="0.6"/>
+                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#fff" strokeWidth="0.8" opacity="0.6" />
                     </pattern>
                   </defs>
                   <rect width="300" height="180" fill="url(#mapGrid)" />
@@ -737,10 +801,10 @@ function App() {
                   <path d="M0 120 Q100 110 200 125 Q260 132 300 118" fill="none" stroke="#fff" strokeWidth="6" />
                   <path d="M100 0 Q105 45 108 90 Q110 135 112 180" fill="none" stroke="#fff" strokeWidth="7" />
                   <path d="M190 0 Q186 50 183 100 Q180 140 178 180" fill="none" stroke="#fff" strokeWidth="6" />
-                  <path d="M0 145 Q70 148 150 143 Q230 138 300 142" fill="none" stroke="#a8c8e8" strokeWidth="10" opacity="0.7"/>
-                  <path d="M150 20 C138 20 128 30 128 42 C128 58 150 82 150 82 C150 82 172 58 172 42 C172 30 162 20 150 20Z" fill="#d93025"/>
-                  <circle cx="150" cy="42" r="8" fill="white"/>
-                  <rect x="155" y="22" width="80" height="20" rx="3" fill="white" opacity="0.9"/>
+                  <path d="M0 145 Q70 148 150 143 Q230 138 300 142" fill="none" stroke="#a8c8e8" strokeWidth="10" opacity="0.7" />
+                  <path d="M150 20 C138 20 128 30 128 42 C128 58 150 82 150 82 C150 82 172 58 172 42 C172 30 162 20 150 20Z" fill="#d93025" />
+                  <circle cx="150" cy="42" r="8" fill="white" />
+                  <rect x="155" y="22" width="80" height="20" rx="3" fill="white" opacity="0.9" />
                   <text x="160" y="35" fontFamily="sans-serif" fontSize="7.5" fill="#333" fontWeight="600">Số 22, An Bình</text>
                   <text x="6" y="174" fontFamily="sans-serif" fontSize="10" fill="#555" fontWeight="700">Google</text>
                   <text x="220" y="174" fontFamily="sans-serif" fontSize="8" fill="#777">Map data ©2026</text>
