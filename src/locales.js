@@ -9,9 +9,9 @@ export const content = {
     },
     hero: {
       subtitle: 'GIỚI THIỆU & TRIẾT LÝ',
-      title1: 'Tuân thủ đúng pháp luật:',
+      title1: 'Tuân thủ đúng pháp luật',
       title2: 'Con đường duy nhất',
-      title3: 'Yên tâm phát triển.',
+      title3: 'Yên tâm phát triển',
       desc: 'Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn đồng hành cùng doanh nghiệp trong lĩnh vực kế toán, thuế và tư vấn tài chính, mang đến giải pháp minh bạch, chính xác và tuân thủ quy định pháp luật, giúp doanh nghiệp phát triển bền vững.',
       btnPrimary: 'Khám phá dịch vụ',
     },
@@ -116,9 +116,9 @@ export const content = {
     },
     hero: {
       subtitle: 'INTRODUCTION & PHILOSOPHY',
-      title1: 'Legal compliance:',
+      title1: 'Legal compliance',
       title2: 'The only path',
-      title3: 'To peace of mind.',
+      title3: 'To peace of mind',
       desc: 'Han Nguyen Accounting and Tax Consulting Co., Ltd. accompanies businesses in the fields of accounting, tax, and financial consulting, providing transparent, accurate solutions that comply with legal regulations, helping businesses develop sustainably.',
       btnPrimary: 'Explore Services',
     },

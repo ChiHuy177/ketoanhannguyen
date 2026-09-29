@@ -165,6 +165,8 @@ function App() {
         }}
       >
         <div className="absolute inset-0 z-0 pointer-events-none" style={{ background: 'radial-gradient(60% 70% at 0% 100%, rgba(20,34,72,0.7), transparent 70%)' }} />
+        {/* Mobile overlay — covers the light-right gradient so text stays readable */}
+        <div className="md:hidden absolute inset-0 z-0 pointer-events-none" style={{ background: 'linear-gradient(180deg, rgba(20,40,100,0.82) 0%, rgba(20,40,100,0.75) 100%)' }} />
         <div
           className="lattice absolute inset-y-0 right-0 w-[60%] pointer-events-none"
           style={{
@@ -179,14 +181,10 @@ function App() {
             <Reveal className="flex flex-col gap-6">
               <img src={logoFull} alt="Kế Toán Hân Nguyễn - Tuân thủ đúng, Yên tâm phát triển" className="w-[420px] max-w-full h-auto object-contain" />
 
-              <p className="font-display font-bold text-[21px] tracking-[1.5px] uppercase" style={{ color: '#FDF1DF' }}>
-                {t[lang].hero.subtitle}
-              </p>
-
-              <h1 className="font-display font-extrabold text-[36px] md:text-[42px] leading-[1.25] uppercase" style={{ color: '#E8C766' }}>
-                <span className="block">{t[lang].hero.title1}</span>
-                <span className="block">{t[lang].hero.title2}</span>
-                <span className="block">{t[lang].hero.title3}</span>
+              <h1 className="font-display font-extrabold leading-[1.25] uppercase text-center w-full" style={{ color: '#E8C766', fontSize: 'clamp(16px, 5.5vw, 42px)' }}>
+                <span className="block whitespace-nowrap">{t[lang].hero.title1}</span>
+                <span className="block whitespace-nowrap">{t[lang].hero.title2}</span>
+                <span className="block whitespace-nowrap">{t[lang].hero.title3}</span>
               </h1>
 
               <p className="text-[17px] leading-[1.7] max-w-[480px]" style={{ color: '#F4E2C7' }}>
