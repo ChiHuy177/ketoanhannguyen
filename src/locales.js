@@ -8,10 +8,11 @@ export const content = {
       contact: 'Liên hệ',
     },
     hero: {
-      subtitle: 'Công ty TNHH Kế toán và tư vấn thuế Hân Nguyễn',
-      title1: 'Kế toán. Thuế.',
-      title2: 'Tư vấn doanh nghiệp.',
-      desc: 'Tuân thủ đúng – Yên tâm phát triển. Chúng tôi không chỉ nhận số liệu để lập báo cáo, chúng tôi thiết lập một hệ thống kế toán hoàn chỉnh và thông suốt cho doanh nghiệp.',
+      subtitle: 'GIỚI THIỆU & TRIẾT LÝ',
+      title1: 'Tuân thủ đúng pháp luật:',
+      title2: 'Con đường duy nhất',
+      title3: 'Yên tâm phát triển.',
+      desc: 'Công ty TNHH Kế toán và Tư vấn Thuế Hân Nguyễn đồng hành cùng doanh nghiệp trong lĩnh vực kế toán, thuế và tư vấn tài chính, mang đến giải pháp minh bạch, chính xác và tuân thủ quy định pháp luật, giúp doanh nghiệp phát triển bền vững.',
       btnPrimary: 'Khám phá dịch vụ',
     },
     system: {
@@ -114,10 +115,11 @@ export const content = {
       contact: 'Contact',
     },
     hero: {
-      subtitle: 'Han Nguyen Accounting & Tax Consulting Co., Ltd',
-      title1: 'Accounting. Tax.',
-      title2: 'Business Consulting.',
-      desc: 'Proper compliance – Assured growth. We do not just process data for reporting; we establish a complete and seamless accounting system for your business.',
+      subtitle: 'INTRODUCTION & PHILOSOPHY',
+      title1: 'Legal compliance:',
+      title2: 'The only path',
+      title3: 'To peace of mind.',
+      desc: 'Han Nguyen Accounting and Tax Consulting Co., Ltd. accompanies businesses in the fields of accounting, tax, and financial consulting, providing transparent, accurate solutions that comply with legal regulations, helping businesses develop sustainably.',
       btnPrimary: 'Explore Services',
     },
     system: {

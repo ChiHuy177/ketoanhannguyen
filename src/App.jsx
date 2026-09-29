@@ -183,8 +183,10 @@ function App() {
                 {t[lang].hero.subtitle}
               </p>
 
-              <h1 className="font-display font-extrabold text-[41px] md:text-[45px] leading-[1.15] uppercase" style={{ color: '#E8C766', textWrap: 'balance' }}>
-                {t[lang].hero.title1} {t[lang].hero.title2}
+              <h1 className="font-display font-extrabold text-[36px] md:text-[42px] leading-[1.25] uppercase" style={{ color: '#E8C766' }}>
+                <span className="block">{t[lang].hero.title1}</span>
+                <span className="block">{t[lang].hero.title2}</span>
+                <span className="block">{t[lang].hero.title3}</span>
               </h1>
 
               <p className="text-[17px] leading-[1.7] max-w-[480px]" style={{ color: '#F4E2C7' }}>
@@ -780,36 +782,22 @@ function App() {
                 </p>
               </div>
 
-              {/* Google Map SVG placeholder */}
-              <a
-                href="https://maps.google.com/?q=Số+22+Khu+Tái+Định+Cư+An+Bình+Phường+An+Bình+Cần+Thơ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-[200px] shrink-0 rounded-[10px] overflow-hidden hover:scale-105 transition-transform"
-                style={{ boxShadow: '0 4px 14px rgba(0,0,0,0.4)', background: '#ECE8DF' }}
-                title={lang === 'vi' ? 'Xem trên Google Maps' : 'View on Google Maps'}
+              {/* Google Maps Embed */}
+              <div
+                className="w-full md:w-[260px] h-[180px] md:h-[160px] shrink-0 rounded-[8px] overflow-hidden"
+                style={{ boxShadow: '0 4px 14px rgba(0,0,0,0.4)' }}
               >
-                <svg viewBox="0 0 300 180" className="w-full h-auto block">
-                  <rect width="300" height="180" fill="#e8e4dc" />
-                  <defs>
-                    <pattern id="mapGrid" width="30" height="30" patternUnits="userSpaceOnUse">
-                      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#fff" strokeWidth="0.8" opacity="0.6" />
-                    </pattern>
-                  </defs>
-                  <rect width="300" height="180" fill="url(#mapGrid)" />
-                  <path d="M0 70 Q80 60 150 75 Q220 90 300 70" fill="none" stroke="#fff" strokeWidth="8" />
-                  <path d="M0 120 Q100 110 200 125 Q260 132 300 118" fill="none" stroke="#fff" strokeWidth="6" />
-                  <path d="M100 0 Q105 45 108 90 Q110 135 112 180" fill="none" stroke="#fff" strokeWidth="7" />
-                  <path d="M190 0 Q186 50 183 100 Q180 140 178 180" fill="none" stroke="#fff" strokeWidth="6" />
-                  <path d="M0 145 Q70 148 150 143 Q230 138 300 142" fill="none" stroke="#a8c8e8" strokeWidth="10" opacity="0.7" />
-                  <path d="M150 20 C138 20 128 30 128 42 C128 58 150 82 150 82 C150 82 172 58 172 42 C172 30 162 20 150 20Z" fill="#d93025" />
-                  <circle cx="150" cy="42" r="8" fill="white" />
-                  <rect x="155" y="22" width="80" height="20" rx="3" fill="white" opacity="0.9" />
-                  <text x="160" y="35" fontFamily="sans-serif" fontSize="7.5" fill="#333" fontWeight="600">Số 22, An Bình</text>
-                  <text x="6" y="174" fontFamily="sans-serif" fontSize="10" fill="#555" fontWeight="700">Google</text>
-                  <text x="220" y="174" fontFamily="sans-serif" fontSize="8" fill="#777">Map data ©2026</text>
-                </svg>
-              </a>
+                <iframe
+                  src="https://maps.google.com/maps?q=Số+22+khu+Tái+định+cư+An+Bình+phường+An+Bình+Cần+Thơ&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Bản đồ Kế Toán Hân Nguyễn"
+                ></iframe>
+              </div>
             </div>
 
             {/* Copyright — merged into dark banner, no separate background */}
