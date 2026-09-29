@@ -603,7 +603,7 @@ function App() {
         <div className="relative z-[1] max-w-7xl mx-auto px-6 md:px-10">
           <Reveal className="mb-8">
             <h2 className="font-display font-black uppercase text-[32px] md:text-[40px] tracking-tight" style={{ color: '#E8C766' }}>
-              {lang === 'vi' ? 'Bằng cấp & Liên hệ' : 'Degrees & Contact'}
+              {lang === 'vi' ? 'Bằng cấp' : 'Degrees'}
             </h2>
           </Reveal>
 
