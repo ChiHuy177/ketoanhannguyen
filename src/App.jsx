@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   Menu, X, Phone, Mail, MapPin, CheckCircle2, Award,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, Send, Loader2,
   Building2, Calculator, HeartHandshake, Laptop, Globe2, FileSearch,
   Scale, Compass, SearchCheck, Settings2, Handshake, Eye, Target, Zap,
 } from 'lucide-react';
@@ -88,10 +88,41 @@ function App() {
   const [lang, setLang] = useState('vi');
   const [zoomedImg, setZoomedImg] = useState(null);
   const [certIdx, setCertIdx] = useState(0);
+  const [contactForm, setContactForm] = useState({ name: '', email: '', phone: '', note: '' });
+  const [contactStatus, setContactStatus] = useState('idle'); // idle | sending | success | error
 
   useEffect(() => {
     document.title = t[lang].pageTitle;
   }, [lang]);
+
+  const handleContactChange = (e) => {
+    setContactForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    const scriptUrl = import.meta.env.VITE_GOOGLE_SCRIPT_URL;
+    if (!scriptUrl) {
+      console.error('VITE_GOOGLE_SCRIPT_URL is not configured.');
+      setContactStatus('error');
+      return;
+    }
+    setContactStatus('sending');
+    try {
+      const res = await fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ ...contactForm, lang }),
+      });
+      const data = await res.json();
+      if (!res.ok || data.result !== 'success') throw new Error(data.error || 'Request failed');
+      setContactStatus('success');
+      setContactForm({ name: '', email: '', phone: '', note: '' });
+    } catch (err) {
+      console.error(err);
+      setContactStatus('error');
+    }
+  };
 
   const certItems = [
     { img: bangThacSi, title: lang === 'vi' ? 'Thạc sĩ' : 'Master' },
@@ -590,9 +621,117 @@ function App() {
         </div>
       </section>
 
+      {/* CONTACT FORM SECTION */}
+      <section id="contact" className="relative overflow-hidden py-20 scroll-mt-28" style={{ background: '#FDF1DF' }}>
+        <div className="relative z-[1] max-w-3xl mx-auto px-6 md:px-10">
+          <Reveal className="text-center mb-10">
+            <h2 className="font-display font-black uppercase text-4xl md:text-5xl mb-3" style={{ color: '#224DA7' }}>
+              {t[lang].contact.title}
+            </h2>
+            <p className="text-[16px] leading-[1.6]" style={{ color: '#5F594C' }}>{t[lang].contact.desc}</p>
+          </Reveal>
+
+          <Reveal>
+            <form
+              onSubmit={handleContactSubmit}
+              className="grid grid-cols-1 md:grid-cols-2 gap-5 bg-white rounded-xl p-6 md:p-8"
+              style={{ boxShadow: '0 14px 34px rgba(34,77,167,0.14)' }}
+            >
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="contact-name" className="text-[13px] font-bold uppercase tracking-wide" style={{ color: '#224DA7' }}>
+                  {t[lang].contact.name}
+                </label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  required
+                  value={contactForm.name}
+                  onChange={handleContactChange}
+                  className="rounded-md border px-3.5 py-2.5 text-[15px] outline-none focus:ring-2 transition"
+                  style={{ borderColor: 'rgba(34,77,167,0.25)', color: '#1B1B1B' }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="contact-phone" className="text-[13px] font-bold uppercase tracking-wide" style={{ color: '#224DA7' }}>
+                  {t[lang].contact.phone}
+                </label>
+                <input
+                  id="contact-phone"
+                  name="phone"
+                  type="tel"
+                  value={contactForm.phone}
+                  onChange={handleContactChange}
+                  className="rounded-md border px-3.5 py-2.5 text-[15px] outline-none focus:ring-2 transition"
+                  style={{ borderColor: 'rgba(34,77,167,0.25)', color: '#1B1B1B' }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5 md:col-span-2">
+                <label htmlFor="contact-email" className="text-[13px] font-bold uppercase tracking-wide" style={{ color: '#224DA7' }}>
+                  {t[lang].contact.email}
+                </label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  value={contactForm.email}
+                  onChange={handleContactChange}
+                  className="rounded-md border px-3.5 py-2.5 text-[15px] outline-none focus:ring-2 transition"
+                  style={{ borderColor: 'rgba(34,77,167,0.25)', color: '#1B1B1B' }}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1.5 md:col-span-2">
+                <label htmlFor="contact-note" className="text-[13px] font-bold uppercase tracking-wide" style={{ color: '#224DA7' }}>
+                  {t[lang].contact.note}
+                </label>
+                <textarea
+                  id="contact-note"
+                  name="note"
+                  rows={4}
+                  value={contactForm.note}
+                  onChange={handleContactChange}
+                  className="rounded-md border px-3.5 py-2.5 text-[15px] outline-none focus:ring-2 transition resize-none"
+                  style={{ borderColor: 'rgba(34,77,167,0.25)', color: '#1B1B1B' }}
+                />
+              </div>
+
+              <div className="md:col-span-2 flex flex-col items-center gap-3 mt-1">
+                <button
+                  type="submit"
+                  disabled={contactStatus === 'sending'}
+                  className="flex items-center justify-center gap-2 text-[14px] font-bold uppercase tracking-wide rounded-sm px-8 py-3 transition disabled:opacity-60"
+                  style={{ background: '#224DA7', color: '#FDF1DF' }}
+                >
+                  {contactStatus === 'sending' ? (
+                    <>
+                      <Loader2 size={16} className="animate-spin" />
+                      {t[lang].contact.sending}
+                    </>
+                  ) : (
+                    <>
+                      <Send size={16} />
+                      {t[lang].contact.submit}
+                    </>
+                  )}
+                </button>
+
+                {contactStatus === 'success' && (
+                  <p className="text-[14px] font-semibold" style={{ color: '#1E8E3E' }}>{t[lang].contact.success}</p>
+                )}
+                {contactStatus === 'error' && (
+                  <p className="text-[14px] font-semibold" style={{ color: '#C0392B' }}>{t[lang].contact.error}</p>
+                )}
+              </div>
+            </form>
+          </Reveal>
+        </div>
+      </section>
+
       {/* FOOTER: BẰNG CẤP & LIÊN HỆ — one combined section, matching the Navy & Gold reference */}
       <footer
-        id="contact"
         className="relative overflow-hidden pt-12 md:pt-16 pb-0 scroll-mt-32"
         style={{
           background: 'linear-gradient(135deg, #2D65C4 0%, #4A83DA 15%, #92B9F0 38%, #F2F6FC 68%, #FFFFFF 100%)',
